@@ -1,8 +1,9 @@
 package cinema.service.impl;
 
-import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import cinema.model.Film;
@@ -20,9 +21,20 @@ public class JpaFilmService implements FilmService{
 		return filmRepository.findOneById(id);
 	}
 
+//	@Override
+//	public List<Film> findAll() {
+//		return filmRepository.findAll();
+//	}
+
 	@Override
-	public List<Film> findAll() {
-		return filmRepository.findAll();
+	public Page<Film> search(String naziv, String zanrovi, Integer trajanje, String distributer, String zemljaPorekla,
+			Integer godinaProizvodnje, int pageNo) {
+		return filmRepository.search(naziv, zanrovi, trajanje, distributer, zemljaPorekla, godinaProizvodnje, PageRequest.of(pageNo, 10));
+	}
+
+	@Override
+	public Page<Film> findAll(int pageNo) {
+		return filmRepository.findAll(PageRequest.of(pageNo, 10));
 	}
 
 }
