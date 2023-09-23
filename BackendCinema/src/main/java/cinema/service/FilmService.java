@@ -15,5 +15,8 @@ public interface FilmService {
 	
 	Page<Film> search(String naziv, String zanrovi, Integer trajanje, String distributer, String zemljaPorekla,
 			Integer godinaProizvodnje, int pageNo);
+	
+//	Page<Film> find(String naziv, String zanrovi, Integer trajanjeOd, Integer trajanjeDo, String distributer, String zemljaPorekla, Integer godinaProizvodnjeOd,
+//			Integer godinaProizvodnjeDo, int pageNo);
 
 }

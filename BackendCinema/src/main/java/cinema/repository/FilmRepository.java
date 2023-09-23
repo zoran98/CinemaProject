@@ -24,5 +24,9 @@ public interface FilmRepository extends JpaRepository<Film, Long>{
 	Page<Film> search(@Param("naziv") String naziv, @Param("zanrovi") String zanrovi, @Param("trajanje") Integer trajanje,
 			@Param("distributer") String distributer, @Param("zemljaPorekla") String zemljaPorekla,
 			@Param("godinaProizvodnje") Integer godinaProizvodnje, Pageable pageable);
+	
+//	Page<Film> findByNazivIgnoreCaseContainsAndZanroviIgnoreCaseContainsAndTrajanjeBetweenAndDistributerAndZemljaPoreklaAndGodinaProizvodnjeBetween(
+//			String naziv, String zanrovi, Integer trajanjeOd, Integer trajanjeDo, String distributer, String zemljaPorekla, Integer godinaProizvodnjeOd,
+//			Integer godinaProizvodnjeDo, Pageable pageable);
 
 }

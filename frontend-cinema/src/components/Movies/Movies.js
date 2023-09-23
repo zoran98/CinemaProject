@@ -44,6 +44,7 @@ const Movies = () => {
     if (search.godinaProizvodnje != "") {
       conf.params.godinaProizvodnje = search.godinaProizvodnje;
     }
+
     CinemaAxios.get("/filmovi", conf)
       .then((res) => {
         console.log(res);
@@ -53,7 +54,7 @@ const Movies = () => {
       })
       .catch((error) => {
         console.log(error);
-        alert("Nije uspelo dodavanje filmova!");
+        alert("Nije uspelo dobavljanje filmova!");
       });
   };
 
@@ -92,6 +93,7 @@ const Movies = () => {
               onChange={(e) => searchValueInputChange(e)}
             ></Form.Control>
           </Form.Group>
+          
           <Form.Group>
             <Form.Label>Zanrovi</Form.Label>
             <Form.Control
@@ -101,6 +103,7 @@ const Movies = () => {
               onChange={(e) => searchValueInputChange(e)}
             ></Form.Control>
           </Form.Group>
+
           <Form.Group>
             <Form.Label>Trajanje</Form.Label>
             <Form.Control
@@ -110,6 +113,7 @@ const Movies = () => {
               onChange={(e) => searchValueInputChange(e)}
             ></Form.Control>
           </Form.Group>
+
           <Form.Group>
             <Form.Label>Distributer</Form.Label>
             <Form.Control
@@ -119,6 +123,7 @@ const Movies = () => {
               onChange={(e) => searchValueInputChange(e)}
             ></Form.Control>
           </Form.Group>
+
           <Form.Group>
             <Form.Label>Zemlja porekla</Form.Label>
             <Form.Control
@@ -128,6 +133,7 @@ const Movies = () => {
               onChange={(e) => searchValueInputChange(e)}
             ></Form.Control>
           </Form.Group>
+
           <Form.Group>
             <Form.Label>Godina proizvodnje</Form.Label>
             <Form.Control
@@ -137,6 +143,7 @@ const Movies = () => {
               onChange={(e) => searchValueInputChange(e)}
             ></Form.Control>
           </Form.Group>
+          
           <Button onClick={() => doSearch()}>Pretraga</Button>
         </Form>
       </Collapse>

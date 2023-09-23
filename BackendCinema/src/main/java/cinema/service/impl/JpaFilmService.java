@@ -37,4 +37,12 @@ public class JpaFilmService implements FilmService{
 		return filmRepository.findAll(PageRequest.of(pageNo, 10));
 	}
 
+//	@Override
+//	public Page<Film> find(String naziv, String zanrovi, Integer trajanjeOd, Integer trajanjeDo, String distributer,
+//			String zemljaPorekla, Integer godinaProizvodnjeOd, Integer godinaProizvodnjeDo, int pageNo) {
+//		return filmRepository.findByNazivIgnoreCaseContainsAndZanroviIgnoreCaseContainsAndTrajanjeBetweenAndDistributerAndZemljaPoreklaAndGodinaProizvodnjeBetween(
+//				naziv, zanrovi, trajanjeOd, trajanjeDo, distributer, zemljaPorekla, godinaProizvodnjeOd, 
+//				godinaProizvodnjeDo, PageRequest.of(pageNo, 10));
+//	}
+
 }
