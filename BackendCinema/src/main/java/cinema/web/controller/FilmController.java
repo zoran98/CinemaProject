@@ -43,19 +43,25 @@ public class FilmController {
 	@GetMapping
 	public ResponseEntity<List<FilmDTO>> getAll(@RequestParam(value = "naziv", required = false) String naziv,
 					@RequestParam(value = "zanrovi", required = false) String zanrovi,
-					@RequestParam(value = "trajanje", required = false) Integer trajanje,
+					@RequestParam(value = "trajanjeOd", required = false) Integer trajanjeOd,
+					@RequestParam(value = "trajanjeDo", required = false) Integer trajanjeDo,
 					@RequestParam(value = "distributer", required = false) String distributer,
 					@RequestParam(value = "zemljaPorekla", required = false) String zemljaPorekla,
-					@RequestParam(value = "godinaProizvodnje", required = false) Integer godinaProizvodnje,
+					@RequestParam(value = "godinaProizvodnjeOd", required = false) Integer godinaProizvodnjeOd,
+					@RequestParam(value = "godinaProizvodnjeDo", required = false) Integer godinaProizvodnjeDo,
 		    		@RequestParam(value = "pageNo", defaultValue = "0") int pageNo){
 				
 
 		//Page<Ljubimac> page = ljubimacService.findAll(pageNo);
 		Page<Film> page = null;
-		   if(naziv != null || zanrovi != null || trajanje != null || distributer != null || zemljaPorekla != null || godinaProizvodnje != null) {
-		      page = filmService.search(naziv, zanrovi, trajanje, distributer, zemljaPorekla, godinaProizvodnje, pageNo);
+		   if(naziv != null || zanrovi != null  || distributer != null || zemljaPorekla != null) {
+		      page = filmService.search(naziv, zanrovi, distributer, zemljaPorekla, pageNo);
+		   } else if(trajanjeOd != null || trajanjeDo != null) {
+			  page = filmService.findByTrajanje(trajanjeOd, trajanjeDo, pageNo);
+		   } else if(godinaProizvodnjeOd != null || godinaProizvodnjeDo != null){
+			  page = filmService.findByGodinaProizvodnje(godinaProizvodnjeOd, godinaProizvodnjeDo, pageNo);
 		   } else {
-		      page = filmService.findAll(pageNo);
+			  page = filmService.findAll(pageNo);
 		   }
 
 		HttpHeaders headers = new HttpHeaders();

@@ -17,16 +17,18 @@ public interface FilmRepository extends JpaRepository<Film, Long>{
 	@Query("SELECT f FROM Film f WHERE" +
 			"(:naziv = NULL OR f.naziv LIKE :naziv) AND " +
 			"(:zanrovi = NULL OR f.zanrovi LIKE :zanrovi) AND " +
-			"(:trajanje = NULL OR f.trajanje = :trajanje) AND " + 
 			"(:distributer = NULL OR f.distributer LIKE :distributer) AND " +
-			"(:zemljaPorekla = NULL OR f.zemljaPorekla LIKE :zemljaPorekla) AND " +
-			"(:godinaProizvodnje = NULL OR f.godinaProizvodnje = :godinaProizvodnje)")
-	Page<Film> search(@Param("naziv") String naziv, @Param("zanrovi") String zanrovi, @Param("trajanje") Integer trajanje,
+			"(:zemljaPorekla = NULL OR f.zemljaPorekla LIKE :zemljaPorekla)")
+	Page<Film> search(@Param("naziv") String naziv, @Param("zanrovi") String zanrovi,
 			@Param("distributer") String distributer, @Param("zemljaPorekla") String zemljaPorekla,
-			@Param("godinaProizvodnje") Integer godinaProizvodnje, Pageable pageable);
+			Pageable pageable);
 	
 //	Page<Film> findByNazivIgnoreCaseContainsAndZanroviIgnoreCaseContainsAndTrajanjeBetweenAndDistributerAndZemljaPoreklaAndGodinaProizvodnjeBetween(
 //			String naziv, String zanrovi, Integer trajanjeOd, Integer trajanjeDo, String distributer, String zemljaPorekla, Integer godinaProizvodnjeOd,
 //			Integer godinaProizvodnjeDo, Pageable pageable);
+	
+	Page<Film> findByTrajanjeBetween(Integer trajanjeOd, Integer trajanjeDo, Pageable pageable);
+	
+	Page<Film> findByGodinaProizvodnjeBetween(Integer godinaProizvodnjeOd, Integer godinaProizvodnjeDo, Pageable pageable);
 
 }

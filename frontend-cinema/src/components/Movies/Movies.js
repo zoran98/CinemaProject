@@ -6,7 +6,7 @@ import { useState } from "react";
 
 const Movies = () => {
   const [movies, setMovies] = useState([]);
-  const [search, setSearch] = useState({ naziv: "", zanrovi: "", trajanje: "", distributer: "", zemljaPorekla: "", godinaProizvodnje: "" });
+  const [search, setSearch] = useState({ naziv: "", zanrovi: "", distributer: "", zemljaPorekla: "", trajanjeOd: "", trajanjeDo: "", godinaProizvodnjeOd: "", godinaProizvodnjeDo: "" });
   const [showSearch, setShowSearch] = useState(false);
   const [totalPages, setTotalPages] = useState(0);
   const [pageNo, setPageNo] = useState(0);
@@ -29,10 +29,6 @@ const Movies = () => {
       conf.params.zanrovi = search.zanrovi;
     }
 
-    if (search.trajanje != "") {
-      conf.params.trajanje = search.trajanje;
-    }
-
     if (search.distributer != "") {
       conf.params.distributer = search.distributer;
     }
@@ -41,8 +37,20 @@ const Movies = () => {
       conf.params.zemljaPorekla = search.zemljaPorekla;
     }
 
-    if (search.godinaProizvodnje != "") {
-      conf.params.godinaProizvodnje = search.godinaProizvodnje;
+    if (search.trajanjeOd != "") {
+      conf.params.trajanjeOd = search.trajanjeOd;
+    }
+
+    if (search.trajanjeDo != "") {
+      conf.params.trajanjeDo = search.trajanjeDo;
+    }
+    
+    if (search.godinaProizvodnjeOd != "") {
+      conf.params.godinaProizvodnjeOd = search.godinaProizvodnjeOd;
+    }
+
+    if (search.godinaProizvodnjeDo != "") {
+      conf.params.godinaProizvodnjeDo = search.godinaProizvodnjeDo;
     }
 
     CinemaAxios.get("/filmovi", conf)
@@ -105,16 +113,6 @@ const Movies = () => {
           </Form.Group>
 
           <Form.Group>
-            <Form.Label>Trajanje</Form.Label>
-            <Form.Control
-              value={search.trajanje}
-              name="trajanje"
-              as="input"
-              onChange={(e) => searchValueInputChange(e)}
-            ></Form.Control>
-          </Form.Group>
-
-          <Form.Group>
             <Form.Label>Distributer</Form.Label>
             <Form.Control
               value={search.distributer}
@@ -135,10 +133,40 @@ const Movies = () => {
           </Form.Group>
 
           <Form.Group>
-            <Form.Label>Godina proizvodnje</Form.Label>
+            <Form.Label>Trajanje od</Form.Label>
             <Form.Control
-              value={search.godinaProizvodnje}
-              name="godinaProizvodnje"
+              value={search.trajanjeOd}
+              name="trajanjeOd"
+              as="input"
+              onChange={(e) => searchValueInputChange(e)}
+            ></Form.Control>
+          </Form.Group>
+
+          <Form.Group>
+            <Form.Label>Trajanje do</Form.Label>
+            <Form.Control
+              value={search.trajanjeDo}
+              name="trajanjeDo"
+              as="input"
+              onChange={(e) => searchValueInputChange(e)}
+            ></Form.Control>
+          </Form.Group>
+
+          <Form.Group>
+            <Form.Label>Godina proizvodnje od</Form.Label>
+            <Form.Control
+              value={search.godinaProizvodnjeOd}
+              name="godinaProizvodnjeOd"
+              as="input"
+              onChange={(e) => searchValueInputChange(e)}
+            ></Form.Control>
+          </Form.Group>
+
+          <Form.Group>
+            <Form.Label>Godina proizvodnje do</Form.Label>
+            <Form.Control
+              value={search.godinaProizvodnjeDo}
+              name="godinaProizvodnjeDo"
               as="input"
               onChange={(e) => searchValueInputChange(e)}
             ></Form.Control>
