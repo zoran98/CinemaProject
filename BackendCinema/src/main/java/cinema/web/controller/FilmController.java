@@ -2,6 +2,8 @@ package cinema.web.controller;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpHeaders;
@@ -10,12 +12,15 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import cinema.model.Film;
 import cinema.service.FilmService;
+import cinema.support.FilmDtoToFilm;
 import cinema.support.FilmToFilmDto;
 import cinema.web.dto.FilmDTO;
 
@@ -26,6 +31,9 @@ public class FilmController {
 	
 	@Autowired
 	private FilmService filmService;
+	
+	@Autowired
+	private FilmDtoToFilm toFilm;
 	
 	@Autowired
 	private FilmToFilmDto toFilmDto;
@@ -68,6 +76,16 @@ public class FilmController {
 		headers.add("Total-Pages", Integer.toString(page.getTotalPages()));
 
 		 return new ResponseEntity<>(toFilmDto.convert(page.getContent()),headers, HttpStatus.OK);
+	}
+	
+	//@PreAuthorize("hasAnyRole('ROLE_KORISNIK', 'ROLE_ADMIN')")
+	@PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
+		public ResponseEntity<FilmDTO> create(@Valid @RequestBody FilmDTO filmDTO){
+			Film film = toFilm.convert(filmDTO);
+		    //  lj.setBrojDostupnihFlasa(0);
+			Film sacuvanFilm = filmService.save(film);
+
+			return new ResponseEntity<>(toFilmDto.convert(sacuvanFilm), HttpStatus.CREATED);
 	}
 
 }

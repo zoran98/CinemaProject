@@ -3,13 +3,24 @@ import { useEffect } from "react";
 import { Button, ButtonGroup, Collapse, Form, Table } from "react-bootstrap";
 import CinemaAxios from "../../apis/CinemaAxios";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const Movies = () => {
   const [movies, setMovies] = useState([]);
-  const [search, setSearch] = useState({ naziv: "", zanrovi: "", distributer: "", zemljaPorekla: "", trajanjeOd: "", trajanjeDo: "", godinaProizvodnjeOd: "", godinaProizvodnjeDo: "" });
+  const [search, setSearch] = useState({
+    naziv: "",
+    zanrovi: "",
+    distributer: "",
+    zemljaPorekla: "",
+    trajanjeOd: "",
+    trajanjeDo: "",
+    godinaProizvodnjeOd: "",
+    godinaProizvodnjeDo: "",
+  });
   const [showSearch, setShowSearch] = useState(false);
   const [totalPages, setTotalPages] = useState(0);
   const [pageNo, setPageNo] = useState(0);
+  const navigate = useNavigate();
 
   useEffect(() => {
     getMovies(0);
@@ -44,7 +55,7 @@ const Movies = () => {
     if (search.trajanjeDo != "") {
       conf.params.trajanjeDo = search.trajanjeDo;
     }
-    
+
     if (search.godinaProizvodnjeOd != "") {
       conf.params.godinaProizvodnjeOd = search.godinaProizvodnjeOd;
     }
@@ -80,6 +91,10 @@ const Movies = () => {
     setSearch(newSearch);
   };
 
+  const goToAdd = () => {
+    navigate("/movies/add")
+  }
+
   return (
     <div>
       <h1>Filmovi</h1>
@@ -101,7 +116,7 @@ const Movies = () => {
               onChange={(e) => searchValueInputChange(e)}
             ></Form.Control>
           </Form.Group>
-          
+
           <Form.Group>
             <Form.Label>Zanrovi</Form.Label>
             <Form.Control
@@ -133,26 +148,6 @@ const Movies = () => {
           </Form.Group>
 
           <Form.Group>
-            <Form.Label>Trajanje od</Form.Label>
-            <Form.Control
-              value={search.trajanjeOd}
-              name="trajanjeOd"
-              as="input"
-              onChange={(e) => searchValueInputChange(e)}
-            ></Form.Control>
-          </Form.Group>
-
-          <Form.Group>
-            <Form.Label>Trajanje do</Form.Label>
-            <Form.Control
-              value={search.trajanjeDo}
-              name="trajanjeDo"
-              as="input"
-              onChange={(e) => searchValueInputChange(e)}
-            ></Form.Control>
-          </Form.Group>
-
-          <Form.Group>
             <Form.Label>Godina proizvodnje od</Form.Label>
             <Form.Control
               value={search.godinaProizvodnjeOd}
@@ -171,10 +166,42 @@ const Movies = () => {
               onChange={(e) => searchValueInputChange(e)}
             ></Form.Control>
           </Form.Group>
-          
+
           <Button onClick={() => doSearch()}>Pretraga</Button>
         </Form>
       </Collapse>
+
+      <Collapse in={showSearch}>
+        <Form style={{ marginTop: 10 }}>
+          <Form.Group>
+            <Form.Label>Trajanje od</Form.Label>
+            <Form.Control
+              value={search.trajanjeOd}
+              name="trajanjeOd"
+              as="input"
+              onChange={(e) => searchValueInputChange(e)}
+            ></Form.Control>
+          </Form.Group>
+
+          <Form.Group>
+            <Form.Label>Trajanje do</Form.Label>
+            <Form.Control
+              value={search.trajanjeDo}
+              name="trajanjeDo"
+              as="input"
+              onChange={(e) => searchValueInputChange(e)}
+            ></Form.Control>
+          </Form.Group>
+          <Button onClick={() => doSearch()}>Pretraga</Button>
+        </Form>
+      </Collapse>
+
+      <ButtonGroup style={{marginTop: 25, float: "left"}}>
+                <Button
+                style={{margin: 3, width: 150}} onClick={() => goToAdd()}>
+                    Dodaj film
+                </Button>
+            </ButtonGroup>
 
       <ButtonGroup style={{ marginTop: 25, float: "right" }}>
         <Button

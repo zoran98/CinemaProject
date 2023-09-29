@@ -21,5 +21,7 @@ public interface FilmService {
 	Page<Film> findByTrajanje(Integer trajanjeOd, Integer trajanjeDo, int pageNo);
 	
 	Page<Film> findByGodinaProizvodnje(Integer godinaProizvodnjeOd, Integer godinaProizvodnjeDo, int pageNo);
+	
+	Film save(Film film);
 
 }

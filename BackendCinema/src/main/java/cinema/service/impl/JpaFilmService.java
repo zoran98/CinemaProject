@@ -29,12 +29,12 @@ public class JpaFilmService implements FilmService{
 	@Override
 	public Page<Film> search(String naziv, String zanrovi, String distributer, String zemljaPorekla,
 			int pageNo) {
-		return filmRepository.search(naziv, zanrovi, distributer, zemljaPorekla, PageRequest.of(pageNo, 10));
+		return filmRepository.search(naziv, zanrovi, distributer, zemljaPorekla, PageRequest.of(pageNo, 4));
 	}
 
 	@Override
 	public Page<Film> findAll(int pageNo) {
-		return filmRepository.findAll(PageRequest.of(pageNo, 10));
+		return filmRepository.findAll(PageRequest.of(pageNo, 4));
 	}
 
 	@Override
@@ -45,7 +45,7 @@ public class JpaFilmService implements FilmService{
 		if(trajanjeDo == null) {
 			trajanjeDo = Integer.MAX_VALUE;
 		}
-		return filmRepository.findByTrajanjeBetween(trajanjeOd, trajanjeDo, PageRequest.of(pageNo, 10));
+		return filmRepository.findByTrajanjeBetween(trajanjeOd, trajanjeDo, PageRequest.of(pageNo, 4));
 	}
 
 	@Override
@@ -56,7 +56,12 @@ public class JpaFilmService implements FilmService{
 		if(godinaProizvodnjeDo == null) {
 			godinaProizvodnjeDo = Integer.MAX_VALUE;
 		}
-		return filmRepository.findByGodinaProizvodnjeBetween(godinaProizvodnjeOd, godinaProizvodnjeDo, PageRequest.of(pageNo, 10));
+		return filmRepository.findByGodinaProizvodnjeBetween(godinaProizvodnjeOd, godinaProizvodnjeDo, PageRequest.of(pageNo, 4));
+	}
+
+	@Override
+	public Film save(Film film) {
+		return filmRepository.save(film);
 	}
 
 //	@Override
