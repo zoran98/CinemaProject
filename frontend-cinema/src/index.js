@@ -13,6 +13,7 @@ import Login from "./components/Login/Login";
 import { logout } from "./services/auth";
 import Movies from "./components/Movies/Movies";
 import AddMovie from "./components/Movies/AddMovie";
+import Movie from "./components/Movies/Movie";
 
 const App = () => {
     return (
@@ -42,6 +43,7 @@ const App = () => {
               <Route path="/login" element={<Login/>}/>
               <Route path="/movies" element={<Movies/>}/>
               <Route path="/movies/add" element={<AddMovie/>}/>
+              <Route path="/movie/:id" element={<Movie/>}/>
               <Route path="*" element={<NotFound/>} />
             </Routes>
           </Container>

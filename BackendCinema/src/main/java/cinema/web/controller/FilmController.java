@@ -12,6 +12,7 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -86,6 +87,18 @@ public class FilmController {
 			Film sacuvanFilm = filmService.save(film);
 
 			return new ResponseEntity<>(toFilmDto.convert(sacuvanFilm), HttpStatus.CREATED);
+	}
+	
+	//@PreAuthorize("hasAnyRole('ROLE_KORISNIK', 'ROLE_ADMIN')")
+	@GetMapping("/{id}")
+		public ResponseEntity<FilmDTO> getOne(@PathVariable Long id){
+			Film film = filmService.findOne(id);
+
+			if(film != null) {
+				return new ResponseEntity<>(toFilmDto.convert(film), HttpStatus.OK);
+			}else {
+				return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+			}
 	}
 
 }

@@ -92,8 +92,12 @@ const Movies = () => {
   };
 
   const goToAdd = () => {
-    navigate("/movies/add")
-  }
+    navigate("/movies/add");
+  };
+
+  const doMovie = (movId) => {
+    navigate("/movie/" + movId);
+  };
 
   return (
     <div>
@@ -196,12 +200,11 @@ const Movies = () => {
         </Form>
       </Collapse>
 
-      <ButtonGroup style={{marginTop: 25, float: "left"}}>
-                <Button
-                style={{margin: 3, width: 150}} onClick={() => goToAdd()}>
-                    Dodaj film
-                </Button>
-            </ButtonGroup>
+      <ButtonGroup style={{ marginTop: 25, float: "left" }}>
+        <Button style={{ margin: 3, width: 150 }} onClick={() => goToAdd()}>
+          Dodaj film
+        </Button>
+      </ButtonGroup>
 
       <ButtonGroup style={{ marginTop: 25, float: "right" }}>
         <Button
@@ -229,6 +232,7 @@ const Movies = () => {
             <th>Distributer</th>
             <th>Zemlja porekla</th>
             <th>Godina proizvodnje</th>
+            <th></th>
           </tr>
         </thead>
         <tbody>
@@ -241,6 +245,19 @@ const Movies = () => {
                 <td>{mov.distributer}</td>
                 <td>{mov.zemljaPorekla}</td>
                 <td>{mov.godinaProizvodnje}</td>
+                <td>
+                  {window.localStorage["role"] == "ROLE_ADMIN"
+                    ? [
+                        <Button
+                          variant="info"
+                          onClick={() => doMovie(mov.id)}
+                          style={{ marginLeft: 5 }}
+                        >
+                          Prikazi film
+                        </Button>,
+                      ]
+                    : null}
+                </td>
               </tr>
             );
           })}
