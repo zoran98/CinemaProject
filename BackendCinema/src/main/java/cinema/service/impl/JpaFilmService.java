@@ -64,6 +64,16 @@ public class JpaFilmService implements FilmService{
 		return filmRepository.save(film);
 	}
 
+	@Override
+	public Film delete(Long id) {
+		Film film = findOne(id);
+		if(film != null) {
+			filmRepository.delete(film);
+			return film;
+		}
+		return null;
+	}
+
 //	@Override
 //	public Page<Film> find(String naziv, String zanrovi, Integer trajanjeOd, Integer trajanjeDo, String distributer,
 //			String zemljaPorekla, Integer godinaProizvodnjeOd, Integer godinaProizvodnjeDo, int pageNo) {

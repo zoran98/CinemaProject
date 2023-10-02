@@ -10,7 +10,9 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -81,24 +83,36 @@ public class FilmController {
 	
 	//@PreAuthorize("hasAnyRole('ROLE_KORISNIK', 'ROLE_ADMIN')")
 	@PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
-		public ResponseEntity<FilmDTO> create(@Valid @RequestBody FilmDTO filmDTO){
-			Film film = toFilm.convert(filmDTO);
-		    //  lj.setBrojDostupnihFlasa(0);
-			Film sacuvanFilm = filmService.save(film);
+	public ResponseEntity<FilmDTO> create(@Valid @RequestBody FilmDTO filmDTO){
+		Film film = toFilm.convert(filmDTO);
+		   //  lj.setBrojDostupnihFlasa(0);
+		Film sacuvanFilm = filmService.save(film);
 
-			return new ResponseEntity<>(toFilmDto.convert(sacuvanFilm), HttpStatus.CREATED);
+		return new ResponseEntity<>(toFilmDto.convert(sacuvanFilm), HttpStatus.CREATED);
 	}
 	
 	//@PreAuthorize("hasAnyRole('ROLE_KORISNIK', 'ROLE_ADMIN')")
 	@GetMapping("/{id}")
-		public ResponseEntity<FilmDTO> getOne(@PathVariable Long id){
-			Film film = filmService.findOne(id);
+	public ResponseEntity<FilmDTO> getOne(@PathVariable Long id){
+		Film film = filmService.findOne(id);
 
-			if(film != null) {
-				return new ResponseEntity<>(toFilmDto.convert(film), HttpStatus.OK);
-			}else {
-				return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-			}
+		if(film != null) {
+			return new ResponseEntity<>(toFilmDto.convert(film), HttpStatus.OK);
+		}else {
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		}
+	}
+	
+	//@PreAuthorize("hasRole('ROLE_ADMIN')")
+	@DeleteMapping("/{id}")
+	public ResponseEntity<Void> delete(@PathVariable Long id){
+		Film obrisanFilm = filmService.delete(id);
+		
+		if(obrisanFilm != null) {
+			return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+		} else {
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		}
 	}
 
 }

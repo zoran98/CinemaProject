@@ -23,5 +23,7 @@ public interface FilmService {
 	Page<Film> findByGodinaProizvodnje(Integer godinaProizvodnjeOd, Integer godinaProizvodnjeDo, int pageNo);
 	
 	Film save(Film film);
+	
+	Film delete(Long id);
 
 }

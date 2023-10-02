@@ -77,6 +77,24 @@ const Movies = () => {
       });
   };
 
+  const doDelete = (movId) => {
+    CinemaAxios.delete("/filmovi/" + movId)
+    .then((res) => {
+      console.log(res)
+      var nextPage
+      if(pageNo == totalPages - 1 && movies.length == 1){
+        nextPage = pageNo - 1
+      } else {
+        nextPage = pageNo
+      }
+      getMovies(nextPage)
+    })
+    .catch((error) => {
+      console.log(error)
+      alert("Doslo je do greske prilikom brisanja!")
+    })
+  };
+
   const doSearch = () => {
     getMovies(0);
   };
@@ -255,6 +273,13 @@ const Movies = () => {
                         >
                           Prikazi film
                         </Button>,
+                        <Button
+                        variant="warning"
+                        onClick={() => doDelete(mov.id)}
+                        style={{ marginLeft: 5 }}
+                      >
+                        Obrisi film
+                      </Button>
                       ]
                     : null}
                 </td>
