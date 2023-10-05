@@ -30,21 +30,22 @@ INSERT INTO filmovi (id, naziv, reziser, glumci, zanrovi, trajanje, distributer,
 INSERT INTO filmovi (id, naziv, reziser, glumci, zanrovi, trajanje, distributer, zemlja_porekla, godina_proizvodnje, opis) 
 	VALUES (7, 'Schindler`s List', 'Steven Spielberg', 'Liam Neeson, Ralph Fiennes, Ben Kingsley', 'War, Drama', 195, 'Universal Pictures', 'USA', 1994, 'Oskar Schindler, a German industrialist and member of the Nazi party, tries to save his Jewish employees after witnessing the persecution of Jews in Poland.');
 
-INSERT INTO projekcije (id, film_id, tip_projekcije_id, sala_id, datum_i_vreme_prikazivanja, cena_karte, user_id) 
-    VALUES (1, 1, 1, 1, '2020-06-21 20:00', 1500.50, 1);
-INSERT INTO projekcije (id, film_id, tip_projekcije_id, sala_id, datum_i_vreme_prikazivanja, cena_karte, user_id) 
-    VALUES (2, 2, 2, 2, '2020-07-22 21:00', 1600.50, 2);
-INSERT INTO projekcije (id, film_id, tip_projekcije_id, sala_id, datum_i_vreme_prikazivanja, cena_karte, user_id) 
-    VALUES (3, 3, 3, 3, '2020-06-22 20:00', 1700.50, 3);
+--INSERT INTO projekcije (id, film_id, tip_projekcije_id, sala_id, datum_i_vreme_prikazivanja, cena_karte, user_id) 
+--    VALUES (1, 1, 1, 1, '2020-06-21 20:00', 1500.50, 1);
+--INSERT INTO projekcije (id, film_id, tip_projekcije_id, sala_id, datum_i_vreme_prikazivanja, cena_karte, user_id) 
+--    VALUES (2, 2, 2, 2, '2020-07-22 21:00', 1600.50, 2);
+--INSERT INTO projekcije (id, film_id, tip_projekcije_id, sala_id, datum_i_vreme_prikazivanja, cena_karte, user_id) 
+--    VALUES (3, 3, 3, 3, '2020-06-22 20:00', 1700.50, 3);
+
     
 
 --INSERT INTO sedista (id, redni_broj, sala_id, karta_id) VALUES (1, 5, 1, 1);
 --INSERT INTO sedista (id, redni_broj, sala_id, karta_id) VALUES (2, 6, 2, 2);
 --INSERT INTO sedista (id, redni_broj, sala_id, karta_id) VALUES (3, 7, 3, 3);
     
-INSERT INTO karte (id, projekcija_id, datum_i_vreme_prodaje, user_id) VALUES (1, 1, '2020-08-10 18:00', 1);
-INSERT INTO karte (id, projekcija_id, datum_i_vreme_prodaje, user_id) VALUES (2, 2, '2020-08-12 19:00', 2);
-INSERT INTO karte (id, projekcija_id, datum_i_vreme_prodaje, user_id) VALUES (3, 3, '2020-08-14 20:00', 3);
+--INSERT INTO karte (id, projekcija_id, datum_i_vreme_prodaje, user_id) VALUES (1, 1, '2020-08-10 18:00', 1);
+--INSERT INTO karte (id, projekcija_id, datum_i_vreme_prodaje, user_id) VALUES (2, 2, '2020-08-12 19:00', 2);
+--INSERT INTO karte (id, projekcija_id, datum_i_vreme_prodaje, user_id) VALUES (3, 3, '2020-08-14 20:00', 3);
 
 	
 	

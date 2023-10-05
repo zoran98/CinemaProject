@@ -79,20 +79,24 @@ const Movies = () => {
 
   const doDelete = (movId) => {
     CinemaAxios.delete("/filmovi/" + movId)
-    .then((res) => {
-      console.log(res)
-      var nextPage
-      if(pageNo == totalPages - 1 && movies.length == 1){
-        nextPage = pageNo - 1
-      } else {
-        nextPage = pageNo
-      }
-      getMovies(nextPage)
-    })
-    .catch((error) => {
-      console.log(error)
-      alert("Doslo je do greske prilikom brisanja!")
-    })
+      .then((res) => {
+        console.log(res);
+        var nextPage;
+        if (pageNo == totalPages - 1 && movies.length == 1) {
+          nextPage = pageNo - 1;
+        } else {
+          nextPage = pageNo;
+        }
+        getMovies(nextPage);
+      })
+      .catch((error) => {
+        console.log(error);
+        alert("Doslo je do greske prilikom brisanja!");
+      });
+  };
+
+  const doEdit = (id) => {
+    navigate("/movies/edit/" + id);
   };
 
   const doSearch = () => {
@@ -264,22 +268,29 @@ const Movies = () => {
                 <td>{mov.zemljaPorekla}</td>
                 <td>{mov.godinaProizvodnje}</td>
                 <td>
+                  <Button
+                    variant="info"
+                    onClick={() => doMovie(mov.id)}
+                    style={{ marginLeft: 5 }}
+                  >
+                    Prikazi film
+                  </Button>
                   {window.localStorage["role"] == "ROLE_ADMIN"
                     ? [
                         <Button
-                          variant="info"
-                          onClick={() => doMovie(mov.id)}
+                          variant="warning"
+                          onClick={() => doDelete(mov.id)}
                           style={{ marginLeft: 5 }}
                         >
-                          Prikazi film
+                          Obrisi film
                         </Button>,
                         <Button
-                        variant="warning"
-                        onClick={() => doDelete(mov.id)}
-                        style={{ marginLeft: 5 }}
-                      >
-                        Obrisi film
-                      </Button>
+                          variant="danger"
+                          onClick={() => doEdit(mov.id)}
+                          style={{ marginLeft: 5 }}
+                        >
+                          Izmeni film
+                        </Button>,
                       ]
                     : null}
                 </td>

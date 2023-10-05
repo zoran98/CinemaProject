@@ -1,12 +1,15 @@
 package cinema.service.impl;
 
 
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import cinema.model.Film;
+import cinema.model.Projekcija;
 import cinema.repository.FilmRepository;
 import cinema.service.FilmService;
 
@@ -64,14 +67,30 @@ public class JpaFilmService implements FilmService{
 		return filmRepository.save(film);
 	}
 
+//	@Override
+//	public Film delete(Long id) {
+//		Optional<Film> film = filmRepository.findById(id);
+//		if(film.isPresent()) {
+//			filmRepository.deleteById(id);
+//			return film.get();
+//		}
+//		return null;
+//	}
+	
 	@Override
 	public Film delete(Long id) {
 		Film film = findOne(id);
 		if(film != null) {
+			film.obrisiSveProjekcije();
 			filmRepository.delete(film);
 			return film;
 		}
 		return null;
+	}
+
+	@Override
+	public Film update(Film film) {
+		return filmRepository.save(film);
 	}
 
 //	@Override

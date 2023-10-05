@@ -25,31 +25,31 @@ public class Film {
 	@Column(nullable = false)
 	private String naziv;
 	
-	@Column(nullable = false)
+	@Column
 	private String reziser;
 	
-	@Column(nullable = false)
+	@Column
 	private String glumci;
 	
-	@Column(nullable = false)
+	@Column
 	private String zanrovi;
 	
-	@Column(nullable = false)
+	@Column
 	private Integer trajanje;
 	
-	@Column(nullable = false)
+	@Column
 	private String distributer;
 	
 	@Column
 	private String zemljaPorekla;
 	
-	@Column(nullable = false)
+	@Column
 	private Integer godinaProizvodnje;
 	
 	@Column
 	private String opis;
 	
-	@OneToMany(mappedBy = "film", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@OneToMany(mappedBy = "film", fetch = FetchType.EAGER , cascade = CascadeType.ALL)
 	private List<Projekcija> projekcije = new ArrayList<Projekcija>();
 	
 	public Film() {
@@ -57,7 +57,7 @@ public class Film {
 	}
 
 	public Film(Long id, String naziv, String reziser, String glumci, String zanrovi, Integer trajanje,
-			String distributer, String zemljaPorekla, Integer godinaProizvodnje, String opis, List<Projekcija> projekcije) {
+			String distributer, String zemljaPorekla, Integer godinaProizvodnje, String opis) {
 		super();
 		this.id = id;
 		this.naziv = naziv;
@@ -69,7 +69,6 @@ public class Film {
 		this.zemljaPorekla = zemljaPorekla;
 		this.godinaProizvodnje = godinaProizvodnje;
 		this.opis = opis;
-		this.projekcije = projekcije;
 	}
 
 	public Long getId() {
@@ -162,15 +161,22 @@ public class Film {
 	
 	public void dodajProjekciju(Projekcija projekcija) {
 		this.projekcije.add(projekcija);
+		if(!equals(projekcija.getFilm())) {
+			projekcija.setFilm(this);
+		}
 	}
 	
-	public void obrisiProjekciju(Long id) {
+	public void obrisiProjekciju(Projekcija projekcija) {
 		for(Projekcija p: this.projekcije) {
 			if(p.getId() == id) {
 				this.projekcije.remove(p);
 				return;
 			}
 		}
+	}
+	
+	public void obrisiSveProjekcije() {
+		this.projekcije.clear();
 	}
 
 	@Override
@@ -194,7 +200,7 @@ public class Film {
 	public String toString() {
 		return "Film [id=" + id + ", naziv=" + naziv + ", reziser=" + reziser + ", glumci=" + glumci + ", zanrovi="
 				+ zanrovi + ", trajanje=" + trajanje + ", distributer=" + distributer + ", zemljaPorekla="
-				+ zemljaPorekla + ", godinaProizvodnje=" + godinaProizvodnje + ", opis=" + opis + ", projekcije=" + projekcije + "]";
+				+ zemljaPorekla + ", godinaProizvodnje=" + godinaProizvodnje + ", opis=" + opis + "]";
 	}
 
 }

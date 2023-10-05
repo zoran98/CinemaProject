@@ -14,6 +14,7 @@ import { logout } from "./services/auth";
 import Movies from "./components/Movies/Movies";
 import AddMovie from "./components/Movies/AddMovie";
 import Movie from "./components/Movies/Movie";
+import EditMovie from "./components/Movies/EditMovie";
 
 const App = () => {
     return (
@@ -44,6 +45,7 @@ const App = () => {
               <Route path="/movies" element={<Movies/>}/>
               <Route path="/movies/add" element={<AddMovie/>}/>
               <Route path="/movie/:id" element={<Movie/>}/>
+              <Route path="/movies/edit/:id" element={<EditMovie/>}/>
               <Route path="*" element={<NotFound/>} />
             </Routes>
           </Container>

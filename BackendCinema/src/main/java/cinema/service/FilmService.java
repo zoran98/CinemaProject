@@ -25,5 +25,7 @@ public interface FilmService {
 	Film save(Film film);
 	
 	Film delete(Long id);
+	
+	Film update(Film film);
 
 }

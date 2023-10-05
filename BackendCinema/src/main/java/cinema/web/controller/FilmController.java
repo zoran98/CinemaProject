@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -103,7 +104,7 @@ public class FilmController {
 		}
 	}
 	
-	//@PreAuthorize("hasRole('ROLE_ADMIN')")
+	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	@DeleteMapping("/{id}")
 	public ResponseEntity<Void> delete(@PathVariable Long id){
 		Film obrisanFilm = filmService.delete(id);
@@ -113,6 +114,20 @@ public class FilmController {
 		} else {
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		}
+	}
+	
+	//@PreAuthorize("hasAnyRole('ROLE_KORISNIK', 'ROLE_ADMIN')")
+	@PutMapping(value = "/{id}",consumes = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<FilmDTO> update(@PathVariable Long id, @Valid @RequestBody FilmDTO filmDTO){
+
+		if(!id.equals(filmDTO.getId())) {
+			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+		}
+
+		Film film = toFilm.convert(filmDTO);
+		Film sacuvanFilm = filmService.update(film);
+
+		return new ResponseEntity<>(toFilmDto.convert(sacuvanFilm),HttpStatus.OK);
 	}
 
 }

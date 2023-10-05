@@ -8,7 +8,6 @@ import java.util.Objects;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -26,16 +25,14 @@ public class Projekcija {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
-	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(nullable = false)
+	@ManyToOne
+	@JoinColumn
 	private Film film;
 	
-	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(nullable = false)
+	@ManyToOne
 	private TipProjekcije tipProjekcije;
 	
-	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(nullable = false)
+	@ManyToOne
 	private Sala sala;
 	
 	@Column(name="datum_i_vreme_prikazivanja", nullable = false)
@@ -44,8 +41,7 @@ public class Projekcija {
 	@Column
 	private Double cenaKarte;
 	
-	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(nullable = false)
+	@ManyToOne
 	private User user;
 	
 	@OneToMany(mappedBy = "projekcija", cascade = CascadeType.ALL)
@@ -56,7 +52,7 @@ public class Projekcija {
 	}
 
 	public Projekcija(Long id, Film film, TipProjekcije tipProjekcije, Sala sala, LocalDateTime datumIVremePrikazivanja,
-			Double cenaKarte, User user, List<Karta> karte) {
+			Double cenaKarte, User user) {
 		super();
 		this.id = id;
 		this.film = film;
@@ -65,7 +61,6 @@ public class Projekcija {
 		this.datumIVremePrikazivanja = datumIVremePrikazivanja;
 		this.cenaKarte = cenaKarte;
 		this.user = user;
-		this.karte = karte;
 	}
 
 	public Long getId() {
@@ -82,6 +77,9 @@ public class Projekcija {
 
 	public void setFilm(Film film) {
 		this.film = film;
+		if(film != null && !film.getProjekcije().contains(this)) {
+			film.getProjekcije().add(this);
+		}
 	}
 
 	public TipProjekcije getTipProjekcije() {
@@ -151,7 +149,8 @@ public class Projekcija {
 
 	@Override
 	public String toString() {
-		return "Projekcija [id=" + id + ", film=" + film.getNaziv() + ", tipProjekcije=" + tipProjekcije.getNaziv() + ", sala=" + sala.getNaziv()
+		String nazivFilma = film == null ? " - " : film.getNaziv();
+		return "Projekcija [id=" + id + ", film=" + nazivFilma + ", tipProjekcije=" + tipProjekcije.getNaziv() + ", sala=" + sala.getNaziv()
 				+ ", datumIVremePrikazivanja=" + datumIVremePrikazivanja + ", cenaKarte=" + cenaKarte + ", korisnik="
 				+ user.getUsername() + ", karte=" + karte + "]";
 	}
