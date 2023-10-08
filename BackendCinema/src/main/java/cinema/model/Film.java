@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -49,7 +48,7 @@ public class Film {
 	@Column
 	private String opis;
 	
-	@OneToMany(mappedBy = "film", fetch = FetchType.EAGER , cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "film", orphanRemoval = true, fetch = FetchType.LAZY)
 	private List<Projekcija> projekcije = new ArrayList<Projekcija>();
 	
 	public Film() {
@@ -176,6 +175,8 @@ public class Film {
 	}
 	
 	public void obrisiSveProjekcije() {
+		for(Projekcija p: this.projekcije)
+			p.setFilm(null);
 		this.projekcije.clear();
 	}
 

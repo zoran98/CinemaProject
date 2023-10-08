@@ -1,7 +1,6 @@
 package cinema.service.impl;
 
 
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -9,7 +8,6 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import cinema.model.Film;
-import cinema.model.Projekcija;
 import cinema.repository.FilmRepository;
 import cinema.service.FilmService;
 
@@ -23,11 +21,6 @@ public class JpaFilmService implements FilmService{
 	public Film findOne(Long id) {
 		return filmRepository.findOneById(id);
 	}
-
-//	@Override
-//	public List<Film> findAll() {
-//		return filmRepository.findAll();
-//	}
 
 	@Override
 	public Page<Film> search(String naziv, String zanrovi, String distributer, String zemljaPorekla,
@@ -66,16 +59,6 @@ public class JpaFilmService implements FilmService{
 	public Film save(Film film) {
 		return filmRepository.save(film);
 	}
-
-//	@Override
-//	public Film delete(Long id) {
-//		Optional<Film> film = filmRepository.findById(id);
-//		if(film.isPresent()) {
-//			filmRepository.deleteById(id);
-//			return film.get();
-//		}
-//		return null;
-//	}
 	
 	@Override
 	public Film delete(Long id) {
