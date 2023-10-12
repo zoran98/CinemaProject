@@ -15,6 +15,7 @@ import Movies from "./components/Movies/Movies";
 import AddMovie from "./components/Movies/AddMovie";
 import Movie from "./components/Movies/Movie";
 import EditMovie from "./components/Movies/EditMovie";
+import Projections from "./components/Projections/Projections";
 
 const App = () => {
     return (
@@ -29,6 +30,9 @@ const App = () => {
             <Nav className="mr-auto">
               <Nav.Link as={Link} to="/movies">
                 Filmovi
+              </Nav.Link>
+              <Nav.Link as={Link} to="/projections">
+                Projekcije
               </Nav.Link>
             </Nav>
 
@@ -46,6 +50,7 @@ const App = () => {
               <Route path="/movies/add" element={<AddMovie/>}/>
               <Route path="/movie/:id" element={<Movie/>}/>
               <Route path="/movies/edit/:id" element={<EditMovie/>}/>
+              <Route path="/projections" element={<Projections/>}/>
               <Route path="*" element={<NotFound/>} />
             </Routes>
           </Container>
