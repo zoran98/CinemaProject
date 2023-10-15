@@ -28,11 +28,18 @@ const Movie = () => {
     navigate("/movies");
   };
 
+  const goToProjections = () => {
+    navigate("/projections");
+  };
+
   return (
     <div>
       <ButtonGroup style={{ marginTop: 25, float: "left" }}>
         <Button style={{ margin: 3, width: 150 }} onClick={() => goToMovies()}>
           Filmovi
+        </Button>,
+        <Button style={{ margin: 3, width: 150 }} onClick={() => goToProjections()}>
+          Projekcije
         </Button>
       </ButtonGroup>
 

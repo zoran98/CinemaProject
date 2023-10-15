@@ -16,6 +16,7 @@ import AddMovie from "./components/Movies/AddMovie";
 import Movie from "./components/Movies/Movie";
 import EditMovie from "./components/Movies/EditMovie";
 import Projections from "./components/Projections/Projections";
+import Projection from "./components/Projections/Projection";
 
 const App = () => {
     return (
@@ -51,6 +52,7 @@ const App = () => {
               <Route path="/movie/:id" element={<Movie/>}/>
               <Route path="/movies/edit/:id" element={<EditMovie/>}/>
               <Route path="/projections" element={<Projections/>}/>
+              <Route path="/projection/:id" element={<Projection/>}/>
               <Route path="*" element={<NotFound/>} />
             </Routes>
           </Container>

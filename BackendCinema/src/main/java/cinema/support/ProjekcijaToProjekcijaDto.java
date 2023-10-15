@@ -3,6 +3,7 @@ package cinema.support;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.stereotype.Component;
 
@@ -11,11 +12,15 @@ import cinema.web.dto.ProjekcijaDTO;
 
 @Component
 public class ProjekcijaToProjekcijaDto implements Converter<Projekcija, ProjekcijaDTO>{
+	
+	@Autowired
+	private FilmToFilmDto toFilmDto;
 
 	@Override
 	public ProjekcijaDTO convert(Projekcija p) {
 		ProjekcijaDTO dto = new ProjekcijaDTO();
 		dto.setId(p.getId());
+		dto.setFilmDTO(toFilmDto.convert(p.getFilm()));
 		dto.setFilmId(p.getFilm().getId());
 		dto.setFilmNaziv(p.getFilm().getNaziv());
 		dto.setTipProjekcijeId(p.getTipProjekcije().getId());

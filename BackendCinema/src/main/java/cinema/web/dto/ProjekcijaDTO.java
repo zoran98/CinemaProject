@@ -8,6 +8,7 @@ public class ProjekcijaDTO {
 	
 	private Long filmId;
 	private String filmNaziv;
+	private FilmDTO filmDTO;
 	
 	private Long tipProjekcijeId;
 	private String tipProjekcijeNaziv;
@@ -49,6 +50,14 @@ public class ProjekcijaDTO {
 	public void setFilmNaziv(String filmNaziv) {
 		this.filmNaziv = filmNaziv;
 	}
+	public FilmDTO getFilmDTO() {
+		return filmDTO;
+	}
+
+	public void setFilmDTO(FilmDTO filmDTO) {
+		this.filmDTO = filmDTO;
+	}
+	
 
 	public Long getTipProjekcijeId() {
 		return tipProjekcijeId;

@@ -10,6 +10,7 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -40,6 +41,18 @@ public class ProjekcijaController {
 		headers.add("Total-Pages", Integer.toString(page.getTotalPages()));
 
 		return new ResponseEntity<>(toProjekcijaDto.convert(page.getContent()),headers, HttpStatus.OK);
+	}
+	
+	//@PreAuthorize("hasAnyRole('ROLE_KORISNIK', 'ROLE_ADMIN')")
+	@GetMapping("/{id}")
+	public ResponseEntity<ProjekcijaDTO> getOne(@PathVariable Long id){
+		Projekcija projekcija = projekcijaService.findOne(id);
+
+		if(projekcija != null) {
+			return new ResponseEntity<>(toProjekcijaDto.convert(projekcija), HttpStatus.OK);
+		}else {
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		}
 	}
 
 }
