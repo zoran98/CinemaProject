@@ -1,27 +1,104 @@
 import { useEffect, useState } from "react";
 
 import CinemaAxios from "../../apis/CinemaAxios";
-import { Button, Table } from "react-bootstrap";
+import { Button, ButtonGroup, Collapse, Form, Table } from "react-bootstrap";
 import { Link, useNavigate } from "react-router-dom";
 
 const Projections = () => {
   const [projections, setProjections] = useState([]);
+  const [search, setSearch] = useState({
+    filmId: -1,
+    datumIVremePrikazivanjaOd: "",
+    datumIVremePrikazivanjaDo: "",
+    tipProjekcijeId: "",
+    salaId: "",
+    cenaKarteOd: "",
+    cenaKarteDo: "",
+  });
+  const [showSearch, setShowSearch] = useState(false);
+  const [totalPages, setTotalPages] = useState(0);
+  const [pageNo, setPageNo] = useState(0);
   const navigate = useNavigate();
+  const [movies, setMovies] = useState([]);
+  const [typeOfProjections, setTypeOfProjections] = useState([]);
+  const [hall, setHall] = useState([]);
 
   useEffect(() => {
+    getMovies();
     getProjections(0);
   }, []);
 
-  const getProjections = () => {
-    CinemaAxios.get("/projekcije")
+  const getProjections = (newPageNo) => {
+    const conf = {
+      params: {
+        pageNo: newPageNo,
+      },
+    };
+    if (search.filmId != -1) {
+      conf.params.filmId = search.filmId;
+    }
+
+    if (search.datumIVremePrikazivanjaOd != "") {
+      conf.params.datumIVremePrikazivanjaOd = search.datumIVremePrikazivanjaOd;
+    }
+
+    if (search.datumIVremePrikazivanjaDo != "") {
+      conf.params.datumIVremePrikazivanjaDo = search.datumIVremePrikazivanjaDo;
+    }
+
+    if (search.tipProjekcijeId != "") {
+      conf.params.tipProjekcijeId = search.tipProjekcijeId;
+    }
+
+    if (search.salaId != "") {
+      conf.params.salaId = search.salaId;
+    }
+
+    if (search.cenaKarteOd != "") {
+      conf.params.cenaKarteOd = search.cenaKarteOd;
+    }
+
+    if (search.cenaKarteDo != "") {
+      conf.params.cenaKarteDo = search.cenaKarteDo;
+    }
+
+    CinemaAxios.get("/projekcije", conf)
       .then((res) => {
         console.log(res);
+        setPageNo(newPageNo);
         setProjections(res.data);
+        setTotalPages(res.headers["total-pages"]);
       })
       .catch((error) => {
         console.log(error);
         alert("Doslo je do greske prilikom dobavljanja projekcija!");
       });
+  };
+
+  const getMovies = () => {
+    CinemaAxios.get("/filmovi/forProjections")
+    .then((res) => {
+      console.log(res);
+      setMovies(res.data);
+    })
+    .catch((error) => {
+      console.log(error);
+      alert("Doslo je do greske prilikom dobavljanja filmova!");
+    })
+  };
+
+  const doSearch = () => {
+    getProjections(0);
+  };
+
+  const searchValueInputChange = (e) => {
+    let newSearch = { ...search };
+
+    const name = e.target.name;
+    const value = e.target.value;
+
+    newSearch[name] = value;
+    setSearch(newSearch);
   };
 
   // const moment = (date) => {
@@ -39,6 +116,139 @@ const Projections = () => {
   return (
     <div>
       <h1>Projekcije</h1>
+
+      <Form.Group style={{ marginTop: 35 }}>
+        <Form.Check
+          type="checkbox"
+          label="Show search form"
+          onClick={(e) => setShowSearch(e.target.checked)}
+        />
+      </Form.Group>
+      <Collapse in={showSearch}>
+        <Form style={{ marginTop: 10 }}>
+          <Form.Group>
+            <Form.Label>Film</Form.Label>
+            <Form.Control
+              onChange={(e) => searchValueInputChange(e)}
+              name="filmId"
+              value={search.filmId}
+              as="select"
+            >
+              <option value={-1}>Odaberi film</option>
+              {movies.map((mov) => {
+                return (
+                  <option value={mov.id} key={mov.id}>
+                    {mov.naziv}
+                  </option>
+                );
+              })}
+            </Form.Control>
+          </Form.Group>
+
+          <Form.Group>
+            <Form.Label>Tip projekcije</Form.Label>
+            <Form.Control
+              onChange={(e) => searchValueInputChange(e)}
+              name="tipProjekcijeId"
+              value={search.tipProjekcijeId}
+              as="select"
+            >
+              <option value={-1}>Odaberi tip projekcije</option>
+              {typeOfProjections.map((top) => {
+                return (
+                  <option value={top.id} key={top.id}>
+                    {top.naziv}
+                  </option>
+                );
+              })}
+            </Form.Control>
+          </Form.Group>
+
+          <Form.Group>
+            <Form.Label>Sala</Form.Label>
+            <Form.Control
+              onChange={(e) => searchValueInputChange(e)}
+              name="salaId"
+              value={search.salaId}
+              as="select"
+            >
+              <option value={-1}>Odaberi salu</option>
+              {hall.map((hall) => {
+                return (
+                  <option value={hall.id} key={hall.id}>
+                    {hall.naziv}
+                  </option>
+                );
+              })}
+            </Form.Control>
+          </Form.Group>
+
+          <Form.Group>
+            <Form.Label>Datum i vreme prikazivanja od</Form.Label>
+            <Form.Control
+              value={search.datumIVremePrikazivanjaOd}
+              name="datumIVremePrikazivanjaOd"
+              as="input"
+              onChange={(e) => searchValueInputChange(e)}
+            ></Form.Control>
+          </Form.Group>
+
+          <Form.Group>
+            <Form.Label>Datum i vreme prikazivanja do</Form.Label>
+            <Form.Control
+              value={search.datumIVremePrikazivanjaDo}
+              name="datumIVremePrikazivanjaDo"
+              as="input"
+              onChange={(e) => searchValueInputChange(e)}
+            ></Form.Control>
+          </Form.Group>
+
+          <Button onClick={() => doSearch()}>Pretraga</Button>
+        </Form>
+      </Collapse>
+
+      <Collapse in={showSearch}>
+        <Form style={{ marginTop: 10 }}>
+          <Form.Group>
+            <Form.Label>Cena karte od</Form.Label>
+            <Form.Control
+              value={search.cenaKarteOd}
+              name="cenaKarteOd"
+              as="input"
+              onChange={(e) => searchValueInputChange(e)}
+            ></Form.Control>
+          </Form.Group>
+
+          <Form.Group>
+            <Form.Label>Cena karte do</Form.Label>
+            <Form.Control
+              value={search.cenaKarteDo}
+              name="cenaKarteDo"
+              as="input"
+              onChange={(e) => searchValueInputChange(e)}
+            ></Form.Control>
+          </Form.Group>
+          <Button onClick={() => doSearch()}>Pretraga</Button>
+        </Form>
+      </Collapse>
+
+      <ButtonGroup style={{ marginTop: 25, float: "right" }}>
+        <Button
+          style={{ margin: 3, width: 90 }}
+          disabled={pageNo == 0}
+          onClick={() => getProjections(pageNo - 1)}
+        >
+          Prethodna
+        </Button>
+        <Button
+          style={{ margin: 3, width: 90 }}
+          disabled={pageNo == totalPages - 1}
+          onClick={() => getProjections(pageNo + 1)}
+        >
+          Sledeca
+        </Button>
+      </ButtonGroup>
+
       <Table bordered striped style={{ marginTop: 5 }}>
         <thead className="thead-dark">
           <tr>
@@ -59,7 +269,11 @@ const Projections = () => {
                     {pro.filmDTO.naziv}
                   </Link>
                 </td>
-                <td>{formatDate(pro.datumIVremePrikazivanja)}</td>
+                <td>
+                  <Link to={"/projection/" + pro.id}>
+                    {formatDate(pro.datumIVremePrikazivanja)}
+                  </Link>
+                </td>
                 <td>{pro.tipProjekcijeNaziv}</td>
                 <td>{pro.salaNaziv}</td>
                 <td>{pro.cenaKarte}</td>
@@ -72,7 +286,7 @@ const Projections = () => {
                           style={{ marginLeft: 5 }}
                         >
                           Prikazi projekciju
-                        </Button>
+                        </Button>,
                       ]
                     : null}
                 </td>

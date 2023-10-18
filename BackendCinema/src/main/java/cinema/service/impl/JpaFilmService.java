@@ -2,6 +2,8 @@ package cinema.service.impl;
 
 
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -75,6 +77,14 @@ public class JpaFilmService implements FilmService{
 	public Film update(Film film) {
 		return filmRepository.save(film);
 	}
+
+	@Override
+	public List<Film> findAll() {
+		// TODO Auto-generated method stub
+		return filmRepository.findAll();
+	}
+
+
 
 //	@Override
 //	public Page<Film> find(String naziv, String zanrovi, Integer trajanjeOd, Integer trajanjeDo, String distributer,

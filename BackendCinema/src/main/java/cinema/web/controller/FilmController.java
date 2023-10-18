@@ -42,14 +42,14 @@ public class FilmController {
 	@Autowired
 	private FilmToFilmDto toFilmDto;
 	
-	//@PreAuthorize("hasRole('ROLE_KORISNIK', 'ROLE_ADMIN')")
-//	@GetMapping
-//	public ResponseEntity<List<FilmDTO>> getAll(){
-//		
-//		List<Film> filmovi = filmService.findAll();
-//
-//		return new ResponseEntity<>(toFilmDto.convert(filmovi), HttpStatus.OK);
-//	}
+//	@PreAuthorize("hasRole('ROLE_KORISNIK', 'ROLE_ADMIN')")
+	@GetMapping("/forProjections")
+	public ResponseEntity<List<FilmDTO>> getAll(){
+		
+		List<Film> filmovi = filmService.findAll();
+
+		return new ResponseEntity<>(toFilmDto.convert(filmovi), HttpStatus.OK);
+	}
 	
 	//@PreAuthorize("hasRole('ROLE_KORISNIK', 'ROLE_ADMIN')")
 	@GetMapping
@@ -86,7 +86,6 @@ public class FilmController {
 	@PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<FilmDTO> create(@Valid @RequestBody FilmDTO filmDTO){
 		Film film = toFilm.convert(filmDTO);
-		   //  lj.setBrojDostupnihFlasa(0);
 		Film sacuvanFilm = filmService.save(film);
 
 		return new ResponseEntity<>(toFilmDto.convert(sacuvanFilm), HttpStatus.CREATED);

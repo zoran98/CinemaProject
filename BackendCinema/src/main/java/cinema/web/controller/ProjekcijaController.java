@@ -1,5 +1,6 @@
 package cinema.web.controller;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,9 +34,25 @@ public class ProjekcijaController {
 	
 	//@PreAuthorize("hasRole('ROLE_KORISNIK', 'ROLE_ADMIN')")
 	@GetMapping
-	public ResponseEntity<List<ProjekcijaDTO>> getAll(@RequestParam(value = "pageNo", defaultValue = "0") int pageNo){
+	public ResponseEntity<List<ProjekcijaDTO>> getAll(@RequestParam(value = "filmId", required = false) Long filmId,
+			@RequestParam(value = "datumIVremePrikazivanjaOd", required = false) LocalDateTime datumIVremePrikazivanjaOd,
+			@RequestParam(value = "datumIVremePrikazivanjaDo", required = false) LocalDateTime datumIVremePrikazivanjaDo,
+			@RequestParam(value = "tipProjekcijeId", required = false) Long tipProjekcijeId,
+			@RequestParam(value = "salaId", required = false) Long salaId,
+			@RequestParam(value = "cenaKarteOd", required = false) Double cenaKarteOd,
+			@RequestParam(value = "cenaKarteDo", required = false) Double cenaKarteDo,
+			@RequestParam(value = "pageNo", defaultValue = "0") int pageNo){
 		
-			Page<Projekcija> page = projekcijaService.findAll(pageNo);
+			Page<Projekcija> page = null;
+			if(filmId != null || tipProjekcijeId != null || salaId != null) {
+				page = projekcijaService.search(filmId, tipProjekcijeId, salaId, pageNo);
+			} else if(datumIVremePrikazivanjaOd != null || datumIVremePrikazivanjaDo != null) {
+				page = projekcijaService.findByDate(datumIVremePrikazivanjaOd, datumIVremePrikazivanjaDo, pageNo);
+			} else if(cenaKarteOd != null || cenaKarteDo != null) {
+				page = projekcijaService.findByCenaKarte(cenaKarteOd, cenaKarteDo, pageNo);
+			} else {
+				page = projekcijaService.findAll(pageNo);
+			}
 				
 		HttpHeaders headers = new HttpHeaders();
 		headers.add("Total-Pages", Integer.toString(page.getTotalPages()));

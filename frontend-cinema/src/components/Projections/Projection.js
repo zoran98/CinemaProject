@@ -28,6 +28,10 @@ const Projection = () => {
     navigate("/projections");
   };
 
+  // const date = (date) => {
+  //   return date.replace("T", " ");
+  // };s
+
   return (
     <div>
       <ButtonGroup style={{ marginTop: 25, float: "left" }}>
