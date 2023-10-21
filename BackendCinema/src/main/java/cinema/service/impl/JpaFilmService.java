@@ -7,6 +7,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import cinema.model.Film;
@@ -27,12 +28,16 @@ public class JpaFilmService implements FilmService{
 	@Override
 	public Page<Film> search(String naziv, String zanrovi, String distributer, String zemljaPorekla,
 			int pageNo) {
-		return filmRepository.search(naziv, zanrovi, distributer, zemljaPorekla, PageRequest.of(pageNo, 4));
+		return filmRepository.search(naziv, zanrovi, distributer, zemljaPorekla, 
+				PageRequest.of(pageNo, 4, Sort.by("naziv").ascending()
+						.and(Sort.by("zanrovi").ascending()
+						.and(Sort.by("distributer").ascending()
+						.and(Sort.by("zemljaPorekla"))))));
 	}
 
 	@Override
 	public Page<Film> findAll(int pageNo) {
-		return filmRepository.findAll(PageRequest.of(pageNo, 4));
+		return filmRepository.findAll(PageRequest.of(pageNo, 4, Sort.by("naziv").ascending()));
 	}
 
 	@Override

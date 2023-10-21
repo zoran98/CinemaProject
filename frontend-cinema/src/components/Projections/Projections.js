@@ -10,8 +10,8 @@ const Projections = () => {
     filmId: -1,
     datumIVremePrikazivanjaOd: "",
     datumIVremePrikazivanjaDo: "",
-    tipProjekcijeId: "",
-    salaId: "",
+    tipProjekcijeId: -1,
+    salaId: -1,
     cenaKarteOd: "",
     cenaKarteDo: "",
   });
@@ -24,6 +24,8 @@ const Projections = () => {
   const [hall, setHall] = useState([]);
 
   useEffect(() => {
+    getTypeOfProjections();
+    getHalls();
     getMovies();
     getProjections(0);
   }, []);
@@ -46,11 +48,11 @@ const Projections = () => {
       conf.params.datumIVremePrikazivanjaDo = search.datumIVremePrikazivanjaDo;
     }
 
-    if (search.tipProjekcijeId != "") {
+    if (search.tipProjekcijeId != -1) {
       conf.params.tipProjekcijeId = search.tipProjekcijeId;
     }
 
-    if (search.salaId != "") {
+    if (search.salaId != -1) {
       conf.params.salaId = search.salaId;
     }
 
@@ -84,6 +86,30 @@ const Projections = () => {
     .catch((error) => {
       console.log(error);
       alert("Doslo je do greske prilikom dobavljanja filmova!");
+    })
+  };
+
+  const getHalls = () => {
+    CinemaAxios.get("/sale")
+    .then((res) => {
+      console.log(res);
+      setHall(res.data);
+    })
+    .catch((error) => {
+      console.log(error);
+      alert("Doslo je do greske prilikom dobavljanja sala!");
+    })
+  };
+
+  const getTypeOfProjections = () =>  {
+    CinemaAxios.get("/tipoviProjekcija")
+    .then((res) => {
+      console.log(res);
+      setTypeOfProjections(res.data);
+    })
+    .catch((error) => {
+      console.log(error);
+      alert("Doslo je do greske prilikom dobavljanja tipova projekcija!");
     })
   };
 
