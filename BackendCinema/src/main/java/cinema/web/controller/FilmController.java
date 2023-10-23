@@ -66,12 +66,18 @@ public class FilmController {
 
 		//Page<Ljubimac> page = ljubimacService.findAll(pageNo);
 		Page<Film> page = null;
-		   if(naziv != null || zanrovi != null  || distributer != null || zemljaPorekla != null) {
-		      page = filmService.search(naziv, zanrovi, distributer, zemljaPorekla, pageNo);
+		   if(zanrovi != null) {
+		      page = filmService.findByZanrovi(zanrovi, pageNo);
+		   } else if(distributer != null) {
+			  page = filmService.findByDistributer(distributer, pageNo);
+		   } else if(zemljaPorekla != null) {
+			  page = filmService.findByZemljaPorekla(zemljaPorekla, pageNo);
 		   } else if(trajanjeOd != null || trajanjeDo != null) {
 			  page = filmService.findByTrajanje(trajanjeOd, trajanjeDo, pageNo);
 		   } else if(godinaProizvodnjeOd != null || godinaProizvodnjeDo != null){
 			  page = filmService.findByGodinaProizvodnje(godinaProizvodnjeOd, godinaProizvodnjeDo, pageNo);
+		   } else if(naziv != null) {
+			  page = filmService.findByNaziv(naziv, pageNo);
 		   } else {
 			  page = filmService.findAll(pageNo);
 		   }

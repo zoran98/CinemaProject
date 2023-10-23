@@ -193,12 +193,6 @@ const Movies = () => {
             ></Form.Control>
           </Form.Group>
 
-          <Button onClick={() => doSearch()}>Pretraga</Button>
-        </Form>
-      </Collapse>
-
-      <Collapse in={showSearch}>
-        <Form style={{ marginTop: 10 }}>
           <Form.Group>
             <Form.Label>Trajanje od</Form.Label>
             <Form.Control
@@ -218,6 +212,7 @@ const Movies = () => {
               onChange={(e) => searchValueInputChange(e)}
             ></Form.Control>
           </Form.Group>
+
           <Button onClick={() => doSearch()}>Pretraga</Button>
         </Form>
       </Collapse>

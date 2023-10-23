@@ -25,15 +25,14 @@ public class JpaFilmService implements FilmService{
 		return filmRepository.findOneById(id);
 	}
 
-	@Override
-	public Page<Film> search(String naziv, String zanrovi, String distributer, String zemljaPorekla,
-			int pageNo) {
-		return filmRepository.search(naziv, zanrovi, distributer, zemljaPorekla, 
-				PageRequest.of(pageNo, 4, Sort.by("naziv").ascending()
-						.and(Sort.by("zanrovi").ascending()
-						.and(Sort.by("distributer").ascending()
-						.and(Sort.by("zemljaPorekla"))))));
-	}
+//	@Override
+//	public Page<Film> search(String zanrovi, String distributer, String zemljaPorekla,
+//			int pageNo) {
+//		return filmRepository.search(zanrovi, distributer, zemljaPorekla, 
+//				PageRequest.of(pageNo, 4, Sort.by("zanrovi").ascending()
+//						.and(Sort.by("distributer").ascending()
+//						.and(Sort.by("zemljaPorekla").ascending()))));
+//	}
 
 	@Override
 	public Page<Film> findAll(int pageNo) {
@@ -85,8 +84,27 @@ public class JpaFilmService implements FilmService{
 
 	@Override
 	public List<Film> findAll() {
-		// TODO Auto-generated method stub
 		return filmRepository.findAll();
+	}
+
+	@Override
+	public Page<Film> findByNaziv(String naziv, int pageNo) {
+		return filmRepository.findByNazivContaining(naziv, PageRequest.of(pageNo, 4, Sort.by("naziv").ascending()));
+	}
+
+	@Override
+	public Page<Film> findByZanrovi(String zanrovi, int pageNo) {
+		return filmRepository.findByZanroviContaining(zanrovi, PageRequest.of(pageNo, 4, Sort.by("zanrovi").ascending()));
+	}
+
+	@Override
+	public Page<Film> findByDistributer(String distributer, int pageNo) {
+		return filmRepository.findByDistributerContaining(distributer, PageRequest.of(pageNo, 4, Sort.by("distributer").ascending()));
+	}
+
+	@Override
+	public Page<Film> findByZemljaPorekla(String zemljaPorekla, int pageNo) {
+		return filmRepository.findByZemljaPoreklaContaining(zemljaPorekla, PageRequest.of(pageNo, 4, Sort.by("zemljaPorekla")));
 	}
 
 

@@ -229,12 +229,6 @@ const Projections = () => {
             ></Form.Control>
           </Form.Group>
 
-          <Button onClick={() => doSearch()}>Pretraga</Button>
-        </Form>
-      </Collapse>
-
-      <Collapse in={showSearch}>
-        <Form style={{ marginTop: 10 }}>
           <Form.Group>
             <Form.Label>Cena karte od</Form.Label>
             <Form.Control
@@ -254,6 +248,7 @@ const Projections = () => {
               onChange={(e) => searchValueInputChange(e)}
             ></Form.Control>
           </Form.Group>
+
           <Button onClick={() => doSearch()}>Pretraga</Button>
         </Form>
       </Collapse>

@@ -15,7 +15,7 @@ public interface FilmService {
 	
 	Page<Film> findAll(int pageNo);
 	
-	Page<Film> search(String naziv, String zanrovi, String distributer, String zemljaPorekla, int pageNo);
+//	Page<Film> search(String zanrovi, String distributer, String zemljaPorekla, int pageNo);
 	
 //	Page<Film> find(String naziv, String zanrovi, Integer trajanjeOd, Integer trajanjeDo, String distributer, String zemljaPorekla, Integer godinaProizvodnjeOd,
 //			Integer godinaProizvodnjeDo, int pageNo);
@@ -23,6 +23,14 @@ public interface FilmService {
 	Page<Film> findByTrajanje(Integer trajanjeOd, Integer trajanjeDo, int pageNo);
 	
 	Page<Film> findByGodinaProizvodnje(Integer godinaProizvodnjeOd, Integer godinaProizvodnjeDo, int pageNo);
+	
+	Page<Film> findByNaziv(String naziv, int pageNo);
+	
+	Page<Film> findByZanrovi(String zanrovi, int pageNo);
+	
+	Page<Film> findByDistributer(String distributer, int pageNo);
+	
+	Page<Film> findByZemljaPorekla(String zemljaPorekla, int pageNo);
 	
 	Film save(Film film);
 	
