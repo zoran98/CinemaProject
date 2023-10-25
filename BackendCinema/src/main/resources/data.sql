@@ -8,10 +8,24 @@ INSERT INTO `user` (id, username, password, date, role)
 INSERT INTO sale (id, naziv) VALUES (1, 'Sala1');
 INSERT INTO sale (id, naziv) VALUES (2, 'Sala2');
 INSERT INTO sale (id, naziv) VALUES (3, 'Sala3');
+INSERT INTO sale (id, naziv) VALUES (4, 'Sala4');
+INSERT INTO sale (id, naziv) VALUES (5, 'Sala5');
+INSERT INTO sale (id, naziv) VALUES (6, 'Sala6');
+INSERT INTO sale (id, naziv) VALUES (7, 'Sala7');
+INSERT INTO sale (id, naziv) VALUES (8, 'Sala8');
+INSERT INTO sale (id, naziv) VALUES (9, 'Sala9');
+INSERT INTO sale (id, naziv) VALUES (10, 'Sala10');
               
 INSERT INTO tipovi_projekcija (id, naziv, sala_id) VALUES (1, '2D', 1);
-INSERT INTO tipovi_projekcija (id, naziv, sala_id) VALUES (2, '3D', 2);
-INSERT INTO tipovi_projekcija (id, naziv, sala_id) VALUES (3, '4D', 3);
+INSERT INTO tipovi_projekcija (id, naziv, sala_id) VALUES (2, 'EXTREME 2D', 2);
+INSERT INTO tipovi_projekcija (id, naziv, sala_id) VALUES (3, 'KIDS SALA 2D', 3);
+INSERT INTO tipovi_projekcija (id, naziv, sala_id) VALUES (4, '4DX 2D', 4);
+INSERT INTO tipovi_projekcija (id, naziv, sala_id) VALUES (5, '3D', 5);
+INSERT INTO tipovi_projekcija (id, naziv, sala_id) VALUES (6, 'EXTREME 3D', 6);
+INSERT INTO tipovi_projekcija (id, naziv, sala_id) VALUES (7, '4DX 3D', 7);
+INSERT INTO tipovi_projekcija (id, naziv, sala_id) VALUES (8, '4D', 8);
+INSERT INTO tipovi_projekcija (id, naziv, sala_id) VALUES (9, 'EXTREME 4D', 9);
+INSERT INTO tipovi_projekcija (id, naziv, sala_id) VALUES (10, '4DX', 10);
 
 
 
@@ -36,6 +50,20 @@ INSERT INTO projekcije (id, film_id, tip_projekcije_id, sala_id, datum_i_vreme_p
     VALUES (2, 2, 2, 2, '2020-07-22 21:00', 1600.50, 2);
 INSERT INTO projekcije (id, film_id, tip_projekcije_id, sala_id, datum_i_vreme_prikazivanja, cena_karte, user_id) 
     VALUES (3, 3, 3, 3, '2020-06-22 20:00', 1700.50, 3);
+INSERT INTO projekcije (id, film_id, tip_projekcije_id, sala_id, datum_i_vreme_prikazivanja, cena_karte, user_id) 
+    VALUES (4, 4, 4, 4, '2021-07-23 21:00', 900.0, 1);
+INSERT INTO projekcije (id, film_id, tip_projekcije_id, sala_id, datum_i_vreme_prikazivanja, cena_karte, user_id) 
+    VALUES (5, 5, 5, 5, '2022-08-24 22:00', 800.50, 2);
+INSERT INTO projekcije (id, film_id, tip_projekcije_id, sala_id, datum_i_vreme_prikazivanja, cena_karte, user_id) 
+    VALUES (6, 6, 6, 6, '2023-09-25 22:00', 2000.50, 3);
+INSERT INTO projekcije (id, film_id, tip_projekcije_id, sala_id, datum_i_vreme_prikazivanja, cena_karte, user_id) 
+    VALUES (7, 7, 7, 7, '2022-10-26 23:00', 500.80, 1);
+INSERT INTO projekcije (id, film_id, tip_projekcije_id, sala_id, datum_i_vreme_prikazivanja, cena_karte, user_id) 
+    VALUES (8, 1, 8, 8, '2021-11-27 19:00', 450.30, 2);
+INSERT INTO projekcije (id, film_id, tip_projekcije_id, sala_id, datum_i_vreme_prikazivanja, cena_karte, user_id) 
+    VALUES (9, 2, 9, 9, '2020-12-28 18:00', 1000, 3);
+INSERT INTO projekcije (id, film_id, tip_projekcije_id, sala_id, datum_i_vreme_prikazivanja, cena_karte, user_id) 
+    VALUES (10, 3, 10, 10, '2021-01-29 17:00', 700, 1);
 
     
 

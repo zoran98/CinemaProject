@@ -24,7 +24,7 @@ public class JpaProjekcijaService implements ProjekcijaService{
 
 	@Override
 	public Page<Projekcija> findAll(int pageNo) {
-		return projekcijaRepository.findAll(PageRequest.of(pageNo, 10));
+		return projekcijaRepository.findAll(PageRequest.of(pageNo, 4));
 	}
 
 	@Override
