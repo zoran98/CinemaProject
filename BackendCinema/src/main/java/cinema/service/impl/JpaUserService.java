@@ -83,4 +83,9 @@ public class JpaUserService implements UserService {
 
         return true;
     }
+
+	@Override
+	public User findOne(Long id) {
+		return userRepository.findOneById(id);
+	}
 }

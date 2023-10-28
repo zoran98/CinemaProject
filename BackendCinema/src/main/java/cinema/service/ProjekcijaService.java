@@ -17,5 +17,7 @@ public interface ProjekcijaService {
 	Page<Projekcija> findByDate(LocalDateTime datumIVremePrikazivanjaOd, LocalDateTime datumIVremePrikazivanjaDo, int pageNo);
 	
 	Page<Projekcija> findByCenaKarte(Double cenaKarteOd, Double cenaKarteDo, int pageNo);
+	
+	Projekcija save(Projekcija projekcija);
 
 }

@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Repository;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import cinema.model.Sala;
@@ -32,6 +33,17 @@ public class SalaController {
 		List<Sala> s = salaService.findAll();
 		
 		return new ResponseEntity<>(toSalaDto.convert(s), HttpStatus.OK);
+	}
+	
+	@GetMapping("/{id}")
+	public ResponseEntity<SalaDTO> getOne(@PathVariable Long id){
+		Sala sala = salaService.findOne(id);
+
+		if(sala != null) {
+			return new ResponseEntity<>(toSalaDto.convert(sala), HttpStatus.OK);
+		}else {
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		}
 	}
 
 }

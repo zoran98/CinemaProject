@@ -27,7 +27,7 @@ public class ProjekcijaToProjekcijaDto implements Converter<Projekcija, Projekci
 		dto.setTipProjekcijeNaziv(p.getTipProjekcije().getNaziv());
 		dto.setSalaId(p.getSala().getId());
 		dto.setSalaNaziv(p.getSala().getNaziv());
-		dto.setDatumIVremePrikazivanja(p.getDatumIVremePrikazivanja());
+		dto.setDatumIVremePrikazivanja(p.getDatumIVremePrikazivanja().toString());
 		dto.setCenaKarte(p.getCenaKarte());
 		dto.setUserId(p.getUser().getId());
 		dto.setUserUsername(p.getUser().getUsername());

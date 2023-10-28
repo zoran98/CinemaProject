@@ -55,4 +55,9 @@ public class JpaProjekcijaService implements ProjekcijaService{
 		return projekcijaRepository.findByCenaKarteBetween(cenaKarteOd, cenaKarteDo, PageRequest.of(pageNo, 4));
 	}
 
+	@Override
+	public Projekcija save(Projekcija projekcija) {
+		return projekcijaRepository.save(projekcija);
+	}
+
 }

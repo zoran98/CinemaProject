@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Repository;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import cinema.model.TipProjekcije;
@@ -32,6 +33,17 @@ public class TipProjekcijeController {
 		List<TipProjekcije> tp = tipProjekcijeService.findAll();
 		
 		return new ResponseEntity<>(toTipProjekcijeDto.convert(tp), HttpStatus.OK);
+	}
+	
+	@GetMapping("/{id}")
+	public ResponseEntity<TipProjekcijeDTO> getOne(@PathVariable Long id){
+		TipProjekcije tipProjekcije = tipProjekcijeService.findOne(id);
+
+		if(tipProjekcije != null) {
+			return new ResponseEntity<>(toTipProjekcijeDto.convert(tipProjekcije), HttpStatus.OK);
+		}else {
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		}
 	}
 
 }

@@ -3,6 +3,8 @@ package cinema.web.controller;
 import java.time.LocalDateTime;
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpHeaders;
@@ -12,12 +14,15 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import cinema.model.Projekcija;
 import cinema.service.ProjekcijaService;
+import cinema.support.ProjekcijaDtoToProjekcija;
 import cinema.support.ProjekcijaToProjekcijaDto;
 import cinema.web.dto.ProjekcijaDTO;
 
@@ -31,6 +36,9 @@ public class ProjekcijaController {
 	
 	@Autowired
 	private ProjekcijaToProjekcijaDto toProjekcijaDto;
+	
+	@Autowired
+	private ProjekcijaDtoToProjekcija toProjekcija;
 	
 	//@PreAuthorize("hasRole('ROLE_KORISNIK', 'ROLE_ADMIN')")
 	@GetMapping
@@ -70,6 +78,15 @@ public class ProjekcijaController {
 		}else {
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		}
+	}
+	
+	//@PreAuthorize("hasAnyRole('ROLE_KORISNIK', 'ROLE_ADMIN')")
+	@PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<ProjekcijaDTO> create(@Valid @RequestBody ProjekcijaDTO projekcijaDTO){
+		Projekcija projekcija = toProjekcija.convert(projekcijaDTO);
+		Projekcija sacuvanaProjekcija = projekcijaService.save(projekcija);
+
+		return new ResponseEntity<>(toProjekcijaDto.convert(sacuvanaProjekcija), HttpStatus.CREATED);
 	}
 
 }

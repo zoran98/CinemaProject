@@ -139,6 +139,10 @@ const Projections = () => {
     navigate("/projection/" + proId);
   };
 
+  const goToAdd = () => {
+    navigate("/projections/add");
+  };
+
   return (
     <div>
       <h1>Projekcije</h1>
@@ -252,6 +256,12 @@ const Projections = () => {
           <Button onClick={() => doSearch()}>Pretraga</Button>
         </Form>
       </Collapse>
+
+      <ButtonGroup style={{ marginTop: 25, float: "left" }}>
+        <Button style={{ margin: 3, width: 150 }} onClick={() => goToAdd()}>
+          Dodaj projekciju
+        </Button>
+      </ButtonGroup>
 
       <ButtonGroup style={{ marginTop: 25, float: "right" }}>
         <Button

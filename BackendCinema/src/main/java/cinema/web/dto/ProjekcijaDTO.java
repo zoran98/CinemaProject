@@ -1,6 +1,7 @@
 package cinema.web.dto;
 
-import java.time.LocalDateTime;
+
+import javax.validation.constraints.Pattern;
 
 public class ProjekcijaDTO {
 	
@@ -16,12 +17,14 @@ public class ProjekcijaDTO {
 	private Long salaId;
 	private String salaNaziv;
 	
-	private LocalDateTime datumIVremePrikazivanja;
+	@Pattern(regexp = "^[0-9]{4}-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1]) (2[0-3]|[01][0-9]):[0-5][0-9]$", message = "Datum i vreme nisu validni.")
+	private String datumIVremePrikazivanja;
 	
 	private Double cenaKarte;
 	
 	private Long userId;
 	private String userUsername;
+//	private UserDto userDTO;
 	
 	public ProjekcijaDTO() {
 		super();
@@ -91,11 +94,11 @@ public class ProjekcijaDTO {
 		this.salaNaziv = salaNaziv;
 	}
 
-	public LocalDateTime getDatumIVremePrikazivanja() {
+	public String getDatumIVremePrikazivanja() {
 		return datumIVremePrikazivanja;
 	}
 
-	public void setDatumIVremePrikazivanja(LocalDateTime datumIVremePrikazivanja) {
+	public void setDatumIVremePrikazivanja(String datumIVremePrikazivanja) {
 		this.datumIVremePrikazivanja = datumIVremePrikazivanja;
 	}
 
@@ -122,6 +125,14 @@ public class ProjekcijaDTO {
 	public void setUserUsername(String userUsername) {
 		this.userUsername = userUsername;
 	}
+//
+//	public UserDto getUserDTO() {
+//		return userDTO;
+//	}
+//
+//	public void setUserDTO(UserDto userDTO) {
+//		this.userDTO = userDTO;
+//	}
 	
 	
 	

@@ -11,6 +11,8 @@ import java.util.Optional;
 public interface UserService {
 
     Optional<User> one(Long id);
+    
+    User findOne(Long id);
 
     List<User> all();
 

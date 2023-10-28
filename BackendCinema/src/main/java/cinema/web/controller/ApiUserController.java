@@ -67,6 +67,17 @@ public class ApiUserController {
 		}
 	}
 	
+//	@GetMapping("/{id}")
+//	public ResponseEntity<UserDto> getOne(@PathVariable Long id){
+//		User user = userService.findOne(id);
+//
+//		if(user != null) {
+//			return new ResponseEntity<>(toDto.convert(user), HttpStatus.OK);
+//		}else {
+//			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+//		}
+//	}
+	
 	@GetMapping
 	public ResponseEntity<List<UserDto>> get(
 			@RequestParam(defaultValue="0") int page){
