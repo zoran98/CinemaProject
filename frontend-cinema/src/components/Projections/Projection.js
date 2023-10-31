@@ -51,7 +51,6 @@ const Projection = () => {
             <th>Sala</th>
             <th>Datum i vreme prikazivanja</th>
             <th>Cena karte</th>
-            <th>Administrator</th>
           </tr>
         </thead>
         <tbody>
@@ -61,7 +60,6 @@ const Projection = () => {
             <td>{projection.salaNaziv}</td>
             <td>{projection.datumIVremePrikazivanja}</td>
             <td>{projection.cenaKarte}</td>
-            <td>{projection.userUsername}</td>
           </tr>
         </tbody>
       </Table>

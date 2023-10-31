@@ -27,9 +27,6 @@ public class User {
     @Enumerated(EnumType.STRING)
     private KorisnickaUloga role;
     
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    private List<Projekcija> projekcije = new ArrayList<Projekcija>();
-    
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
 	private List<Karta> karte = new ArrayList<Karta>();
 

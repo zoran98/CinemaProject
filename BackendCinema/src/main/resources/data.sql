@@ -44,26 +44,26 @@ INSERT INTO filmovi (id, naziv, reziser, glumci, zanrovi, trajanje, distributer,
 INSERT INTO filmovi (id, naziv, reziser, glumci, zanrovi, trajanje, distributer, zemlja_porekla, godina_proizvodnje, opis) 
 	VALUES (7, 'Schindler`s List', 'Steven Spielberg', 'Liam Neeson, Ralph Fiennes, Ben Kingsley', 'War, Drama', 195, 'Universal Pictures', 'USA', 1994, 'Oskar Schindler, a German industrialist and member of the Nazi party, tries to save his Jewish employees after witnessing the persecution of Jews in Poland.');
 
-INSERT INTO projekcije (id, film_id, tip_projekcije_id, sala_id, datum_i_vreme_prikazivanja, cena_karte, user_id) 
-    VALUES (1, 1, 1, 1, '2020-06-21 20:00', 1500.50, 1);
-INSERT INTO projekcije (id, film_id, tip_projekcije_id, sala_id, datum_i_vreme_prikazivanja, cena_karte, user_id) 
-    VALUES (2, 2, 2, 2, '2020-07-22 21:00', 1600.50, 2);
-INSERT INTO projekcije (id, film_id, tip_projekcije_id, sala_id, datum_i_vreme_prikazivanja, cena_karte, user_id) 
-    VALUES (3, 3, 3, 3, '2020-06-22 20:00', 1700.50, 3);
-INSERT INTO projekcije (id, film_id, tip_projekcije_id, sala_id, datum_i_vreme_prikazivanja, cena_karte, user_id) 
-    VALUES (4, 4, 4, 4, '2021-07-23 21:00', 900.0, 1);
-INSERT INTO projekcije (id, film_id, tip_projekcije_id, sala_id, datum_i_vreme_prikazivanja, cena_karte, user_id) 
-    VALUES (5, 5, 5, 5, '2022-08-24 22:00', 800.50, 2);
-INSERT INTO projekcije (id, film_id, tip_projekcije_id, sala_id, datum_i_vreme_prikazivanja, cena_karte, user_id) 
-    VALUES (6, 6, 6, 6, '2023-09-25 22:00', 2000.50, 3);
-INSERT INTO projekcije (id, film_id, tip_projekcije_id, sala_id, datum_i_vreme_prikazivanja, cena_karte, user_id) 
-    VALUES (7, 7, 7, 7, '2022-10-26 23:00', 500.80, 1);
-INSERT INTO projekcije (id, film_id, tip_projekcije_id, sala_id, datum_i_vreme_prikazivanja, cena_karte, user_id) 
-    VALUES (8, 1, 8, 8, '2021-11-27 19:00', 450.30, 2);
-INSERT INTO projekcije (id, film_id, tip_projekcije_id, sala_id, datum_i_vreme_prikazivanja, cena_karte, user_id) 
-    VALUES (9, 2, 9, 9, '2020-12-28 18:00', 1000, 3);
-INSERT INTO projekcije (id, film_id, tip_projekcije_id, sala_id, datum_i_vreme_prikazivanja, cena_karte, user_id) 
-    VALUES (10, 3, 10, 10, '2021-01-29 17:00', 700, 1);
+INSERT INTO projekcije (id, film_id, tip_projekcije_id, sala_id, datum_i_vreme_prikazivanja, cena_karte) 
+    VALUES (1, 1, 1, 1, '2020-06-21 20:00', 1500.50);
+INSERT INTO projekcije (id, film_id, tip_projekcije_id, sala_id, datum_i_vreme_prikazivanja, cena_karte) 
+    VALUES (2, 2, 2, 2, '2020-07-22 21:00', 1600.50);
+INSERT INTO projekcije (id, film_id, tip_projekcije_id, sala_id, datum_i_vreme_prikazivanja, cena_karte) 
+    VALUES (3, 3, 3, 3, '2020-06-22 20:00', 1700.50);
+INSERT INTO projekcije (id, film_id, tip_projekcije_id, sala_id, datum_i_vreme_prikazivanja, cena_karte) 
+    VALUES (4, 4, 4, 4, '2021-07-23 21:00', 900.0);
+INSERT INTO projekcije (id, film_id, tip_projekcije_id, sala_id, datum_i_vreme_prikazivanja, cena_karte) 
+    VALUES (5, 5, 5, 5, '2022-08-24 22:00', 800.50);
+INSERT INTO projekcije (id, film_id, tip_projekcije_id, sala_id, datum_i_vreme_prikazivanja, cena_karte) 
+    VALUES (6, 6, 6, 6, '2023-09-25 22:00', 2000.50);
+INSERT INTO projekcije (id, film_id, tip_projekcije_id, sala_id, datum_i_vreme_prikazivanja, cena_karte) 
+    VALUES (7, 7, 7, 7, '2022-10-26 23:00', 500.80);
+INSERT INTO projekcije (id, film_id, tip_projekcije_id, sala_id, datum_i_vreme_prikazivanja, cena_karte) 
+    VALUES (8, 1, 8, 8, '2021-11-27 19:00', 450.30);
+INSERT INTO projekcije (id, film_id, tip_projekcije_id, sala_id, datum_i_vreme_prikazivanja, cena_karte) 
+    VALUES (9, 2, 9, 9, '2020-12-28 18:00', 1000);
+INSERT INTO projekcije (id, film_id, tip_projekcije_id, sala_id, datum_i_vreme_prikazivanja, cena_karte) 
+    VALUES (10, 3, 10, 10, '2021-01-29 17:00', 700);
 
     
 

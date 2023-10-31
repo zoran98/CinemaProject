@@ -15,7 +15,6 @@ import cinema.service.FilmService;
 import cinema.service.ProjekcijaService;
 import cinema.service.SalaService;
 import cinema.service.TipProjekcijeService;
-import cinema.service.UserService;
 import cinema.web.dto.ProjekcijaDTO;
 
 @Component
@@ -32,9 +31,6 @@ public class ProjekcijaDtoToProjekcija implements Converter<ProjekcijaDTO, Proje
 	
 	@Autowired
 	private SalaService salaService;
-	
-	@Autowired
-	private UserService userService;
 
 	@Override
 	public Projekcija convert(ProjekcijaDTO dto) {
@@ -51,7 +47,6 @@ public class ProjekcijaDtoToProjekcija implements Converter<ProjekcijaDTO, Proje
 			p.setSala(salaService.findOne(dto.getSalaId()));
 			p.setDatumIVremePrikazivanja(getLocalDateTime(dto.getDatumIVremePrikazivanja()));
 			p.setCenaKarte(dto.getCenaKarte());
-			p.setUser(userService.findOne(dto.getUserId()));
 		}
 		return p;
 	}

@@ -22,8 +22,8 @@ public class ProjekcijaDTO {
 	
 	private Double cenaKarte;
 	
-	private Long userId;
-	private String userUsername;
+//	private Long userId;
+//	private String userUsername;
 //	private UserDto userDTO;
 	
 	public ProjekcijaDTO() {
@@ -110,21 +110,21 @@ public class ProjekcijaDTO {
 		this.cenaKarte = cenaKarte;
 	}
 
-	public Long getUserId() {
-		return userId;
-	}
-
-	public void setUserId(Long userId) {
-		this.userId = userId;
-	}
-
-	public String getUserUsername() {
-		return userUsername;
-	}
-
-	public void setUserUsername(String userUsername) {
-		this.userUsername = userUsername;
-	}
+//	public Long getUserId() {
+//		return userId;
+//	}
+//
+//	public void setUserId(Long userId) {
+//		this.userId = userId;
+//	}
+//
+//	public String getUserUsername() {
+//		return userUsername;
+//	}
+//
+//	public void setUserUsername(String userUsername) {
+//		this.userUsername = userUsername;
+//	}
 //
 //	public UserDto getUserDTO() {
 //		return userDTO;

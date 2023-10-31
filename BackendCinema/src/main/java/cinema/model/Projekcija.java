@@ -39,9 +39,6 @@ public class Projekcija {
 	@Column
 	private Double cenaKarte;
 	
-	@ManyToOne
-	private User user;
-	
 	@OneToMany(mappedBy = "projekcija", cascade = CascadeType.ALL)
 	private List<Karta> karte = new ArrayList<Karta>();
 	
@@ -50,7 +47,7 @@ public class Projekcija {
 	}
 
 	public Projekcija(Long id, Film film, TipProjekcije tipProjekcije, Sala sala, LocalDateTime datumIVremePrikazivanja,
-			Double cenaKarte, User user) {
+			Double cenaKarte) {
 		super();
 		this.id = id;
 		this.film = film;
@@ -58,7 +55,6 @@ public class Projekcija {
 		this.sala = sala;
 		this.datumIVremePrikazivanja = datumIVremePrikazivanja;
 		this.cenaKarte = cenaKarte;
-		this.user = user;
 	}
 
 	public Long getId() {
@@ -112,14 +108,6 @@ public class Projekcija {
 		this.cenaKarte = cenaKarte;
 	}
 
-	public User getUser() {
-		return user;
-	}
-
-	public void setUser(User user) {
-		this.user = user;
-	}
-	
 	public List<Karta> getKarte() {
 		return karte;
 	}
@@ -149,7 +137,6 @@ public class Projekcija {
 	public String toString() {
 		String nazivFilma = film == null ? " - " : film.getNaziv();
 		return "Projekcija [id=" + id + ", film=" + nazivFilma + ", tipProjekcije=" + tipProjekcije.getNaziv() + ", sala=" + sala.getNaziv()
-				+ ", datumIVremePrikazivanja=" + datumIVremePrikazivanja + ", cenaKarte=" + cenaKarte + ", korisnik="
-				+ user.getUsername() + ", karte=" + karte + "]";
+				+ ", datumIVremePrikazivanja=" + datumIVremePrikazivanja + ", cenaKarte=" + cenaKarte + ", karte=" + karte + "]";
 	}
 }

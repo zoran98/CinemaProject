@@ -30,7 +30,7 @@ const AddProjection = () => {
     };
 
     const doAdd = () => {
-        CinemaAxios.post("/projekcije", projection)
+        CinemaAxios.post("/projekcije/", projection)
         .then((res) => {
             console.log(res);
             setProjection(projection);

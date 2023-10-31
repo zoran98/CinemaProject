@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useCallback } from "react";
 import { useEffect } from "react";
 import { Button, ButtonGroup, Collapse, Form, Table } from "react-bootstrap";
 import CinemaAxios from "../../apis/CinemaAxios";

@@ -1,6 +1,10 @@
 package cinema.web.controller;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.List;
 
 import javax.validation.Valid;
@@ -43,8 +47,8 @@ public class ProjekcijaController {
 	//@PreAuthorize("hasRole('ROLE_KORISNIK', 'ROLE_ADMIN')")
 	@GetMapping
 	public ResponseEntity<List<ProjekcijaDTO>> getAll(@RequestParam(value = "filmId", required = false) Long filmId,
-			@RequestParam(value = "datumIVremePrikazivanjaOd", required = false) LocalDateTime datumIVremePrikazivanjaOd,
-			@RequestParam(value = "datumIVremePrikazivanjaDo", required = false) LocalDateTime datumIVremePrikazivanjaDo,
+			@RequestParam(value = "datumIVremePrikazivanjaOd", required = false) String datumIVremePrikazivanjaOd,
+			@RequestParam(value = "datumIVremePrikazivanjaDo", required = false) String datumIVremePrikazivanjaDo,
 			@RequestParam(value = "tipProjekcijeId", required = false) Long tipProjekcijeId,
 			@RequestParam(value = "salaId", required = false) Long salaId,
 			@RequestParam(value = "cenaKarteOd", required = false) Double cenaKarteOd,
@@ -55,7 +59,11 @@ public class ProjekcijaController {
 			if(filmId != null || tipProjekcijeId != null || salaId != null) {
 				page = projekcijaService.search(filmId, tipProjekcijeId, salaId, pageNo);
 			} else if(datumIVremePrikazivanjaOd != null || datumIVremePrikazivanjaDo != null) {
-				page = projekcijaService.findByDate(datumIVremePrikazivanjaOd, datumIVremePrikazivanjaDo, pageNo);
+				
+				LocalDateTime datumIVremeOd = getLocalDateTime(datumIVremePrikazivanjaOd);
+				LocalDateTime datumIVremeDo = getLocalDateTime(datumIVremePrikazivanjaDo);
+				
+				page = projekcijaService.findByDate(datumIVremeOd, datumIVremeDo, pageNo);
 			} else if(cenaKarteOd != null || cenaKarteDo != null) {
 				page = projekcijaService.findByCenaKarte(cenaKarteOd, cenaKarteDo, pageNo);
 			} else {
@@ -88,5 +96,12 @@ public class ProjekcijaController {
 
 		return new ResponseEntity<>(toProjekcijaDto.convert(sacuvanaProjekcija), HttpStatus.CREATED);
 	}
+	
+	private LocalDateTime getLocalDateTime(String datumIVreme) throws DateTimeParseException {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        LocalDate datum = LocalDate.parse(datumIVreme.substring(0, 10), formatter);
+        LocalTime vreme = LocalTime.parse(datumIVreme.substring(11), DateTimeFormatter.ofPattern("HH:mm"));
+        return LocalDateTime.of(datum, vreme);
+    }
 
 }

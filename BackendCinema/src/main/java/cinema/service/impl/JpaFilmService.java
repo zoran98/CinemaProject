@@ -1,7 +1,5 @@
 package cinema.service.impl;
 
-
-
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,15 +22,6 @@ public class JpaFilmService implements FilmService{
 	public Film findOne(Long id) {
 		return filmRepository.findOneById(id);
 	}
-
-//	@Override
-//	public Page<Film> search(String zanrovi, String distributer, String zemljaPorekla,
-//			int pageNo) {
-//		return filmRepository.search(zanrovi, distributer, zemljaPorekla, 
-//				PageRequest.of(pageNo, 4, Sort.by("zanrovi").ascending()
-//						.and(Sort.by("distributer").ascending()
-//						.and(Sort.by("zemljaPorekla").ascending()))));
-//	}
 
 	@Override
 	public Page<Film> findAll(int pageNo) {
@@ -107,14 +96,5 @@ public class JpaFilmService implements FilmService{
 		return filmRepository.findByZemljaPoreklaContaining(zemljaPorekla, PageRequest.of(pageNo, 4, Sort.by("zemljaPorekla")));
 	}
 
-
-
-//	@Override
-//	public Page<Film> find(String naziv, String zanrovi, Integer trajanjeOd, Integer trajanjeDo, String distributer,
-//			String zemljaPorekla, Integer godinaProizvodnjeOd, Integer godinaProizvodnjeDo, int pageNo) {
-//		return filmRepository.findByNazivIgnoreCaseContainsAndZanroviIgnoreCaseContainsAndTrajanjeBetweenAndDistributerAndZemljaPoreklaAndGodinaProizvodnjeBetween(
-//				naziv, zanrovi, trajanjeOd, trajanjeDo, distributer, zemljaPorekla, godinaProizvodnjeOd, 
-//				godinaProizvodnjeDo, PageRequest.of(pageNo, 10));
-//	}
 
 }
