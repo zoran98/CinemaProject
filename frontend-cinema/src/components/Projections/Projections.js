@@ -24,10 +24,10 @@ const Projections = () => {
   const [hall, setHall] = useState([]);
 
   useEffect(() => {
+    getProjections(0);
     getTypeOfProjections();
     getHalls();
     getMovies();
-    getProjections(0);
   }, []);
 
   const getProjections = (newPageNo) => {
@@ -77,40 +77,58 @@ const Projections = () => {
       });
   };
 
-  const getMovies = () => {
-    CinemaAxios.get("/filmovi/forProjections")
+  const doDelete = (proId) => {
+    CinemaAxios.delete("/projekcije/" + proId)
     .then((res) => {
       console.log(res);
-      setMovies(res.data);
+      var nextPage;
+      if (pageNo == totalPages - 1 && projections.length == 1) {
+        nextPage = pageNo - 1;
+      } else {
+        nextPage = pageNo;
+      }
+      getProjections(nextPage);
     })
     .catch((error) => {
       console.log(error);
-      alert("Doslo je do greske prilikom dobavljanja filmova!");
-    })
+      alert("Doslo je do greske prilikom brisanja projekcije!");
+    });
+  };
+
+  const getMovies = () => {
+    CinemaAxios.get("/filmovi/forProjections")
+      .then((res) => {
+        console.log(res);
+        setMovies(res.data);
+      })
+      .catch((error) => {
+        console.log(error);
+        alert("Doslo je do greske prilikom dobavljanja filmova!");
+      });
   };
 
   const getHalls = () => {
     CinemaAxios.get("/sale")
-    .then((res) => {
-      console.log(res);
-      setHall(res.data);
-    })
-    .catch((error) => {
-      console.log(error);
-      alert("Doslo je do greske prilikom dobavljanja sala!");
-    })
+      .then((res) => {
+        console.log(res);
+        setHall(res.data);
+      })
+      .catch((error) => {
+        console.log(error);
+        alert("Doslo je do greske prilikom dobavljanja sala!");
+      });
   };
 
-  const getTypeOfProjections = () =>  {
+  const getTypeOfProjections = () => {
     CinemaAxios.get("/tipoviProjekcija")
-    .then((res) => {
-      console.log(res);
-      setTypeOfProjections(res.data);
-    })
-    .catch((error) => {
-      console.log(error);
-      alert("Doslo je do greske prilikom dobavljanja tipova projekcija!");
-    })
+      .then((res) => {
+        console.log(res);
+        setTypeOfProjections(res.data);
+      })
+      .catch((error) => {
+        console.log(error);
+        alert("Doslo je do greske prilikom dobavljanja tipova projekcija!");
+      });
   };
 
   const doSearch = () => {
@@ -127,9 +145,11 @@ const Projections = () => {
     setSearch(newSearch);
   };
 
-  // const moment = (date) => {
-  //     return moment(date, 'DD-MM-YYYY').format();
-  // }
+  
+
+  const moment = (date) => {
+      return moment(date, 'DD-MM-YYYY').format();
+  }
 
   const formatDate = (date) => {
     return date.replace("T", " ");
@@ -317,6 +337,13 @@ const Projections = () => {
                           style={{ marginLeft: 5 }}
                         >
                           Prikazi projekciju
+                        </Button>,
+                        <Button
+                          variant="danger"
+                          onClick={() => doDelete(pro.id)}
+                          style={{ marginLeft: 5 }}
+                        >
+                          Obrisi projekciju
                         </Button>,
                       ]
                     : null}

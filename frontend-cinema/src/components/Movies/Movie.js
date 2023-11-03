@@ -7,9 +7,12 @@ const Movie = () => {
   const [movie, setMovie] = useState({});
   const navigate = useNavigate();
   const routeParams = useParams();
+  const [showButton, setShowButton] = useState(true);
+  const [projections, setProjections] = useState([]);
 
   useEffect(() => {
     getMovie();
+    getProjections();
   }, []);
 
   const getMovie = () => {
@@ -24,6 +27,18 @@ const Movie = () => {
       });
   };
 
+  const getProjections = () => {
+    CinemaAxios.get("/projekcije")
+    .then((res) => {
+      console.log(res);
+      setProjections(res.data);
+    })
+    .catch((error) => {
+      console.log(error);
+      alert("Doslo je do greske prilikom dobavljanja projekcija!");
+    })
+  };
+
   const goToMovies = () => {
     navigate("/movies");
   };
@@ -32,13 +47,30 @@ const Movie = () => {
     navigate("/projections");
   };
 
+  const someFunction = (movId) => {
+    if(movId === projections.filmId){
+      if(projections.datumIVremePrikazivanja < Date.now()){
+        return setShowButton(false);
+      }
+    }
+  };
+
+  const buyTicket = (movId) => {
+    setShowButton(false);
+    alert("Kupili ste kartu!");
+  };
+
   return (
     <div>
       <ButtonGroup style={{ marginTop: 25, float: "left" }}>
         <Button style={{ margin: 3, width: 150 }} onClick={() => goToMovies()}>
           Filmovi
-        </Button>,
-        <Button style={{ margin: 3, width: 150 }} onClick={() => goToProjections()}>
+        </Button>
+        ,
+        <Button
+          style={{ margin: 3, width: 150 }}
+          onClick={() => goToProjections()}
+        >
           Projekcije
         </Button>
       </ButtonGroup>
@@ -55,6 +87,7 @@ const Movie = () => {
             <th>Zemlja porekla</th>
             <th>Godina proizvodnje</th>
             <th>Opis</th>
+            <th></th>
           </tr>
         </thead>
         <tbody>
@@ -68,6 +101,16 @@ const Movie = () => {
             <td>{movie.zemljaPorekla}</td>
             <td>{movie.godinaProizvodnje}</td>
             <td>{movie.opis}</td>
+            <td>{showButton &&
+              <Button
+                hidden={someFunction(movie.id)}
+                variant="success"
+                onClick={() => buyTicket(movie.id)}
+                style={{ marginLeft: 5 }}
+              >
+                Kupi kartu
+              </Button>}
+            </td>
           </tr>
         </tbody>
       </Table>

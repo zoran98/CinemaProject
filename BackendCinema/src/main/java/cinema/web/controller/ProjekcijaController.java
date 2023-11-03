@@ -8,6 +8,7 @@ import java.time.format.DateTimeParseException;
 import java.util.List;
 
 import javax.validation.Valid;
+import javax.validation.constraints.Positive;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -15,7 +16,9 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -103,5 +106,26 @@ public class ProjekcijaController {
         LocalTime vreme = LocalTime.parse(datumIVreme.substring(11), DateTimeFormatter.ofPattern("HH:mm"));
         return LocalDateTime.of(datum, vreme);
     }
+	
+//	//@PreAuthorize("hasAnyRole('KORISNIK', 'ADMIN')")
+//    @GetMapping("/{id}/projekcije")
+//    public ResponseEntity<List<ProjekcijaDTO>> findByFilmId(@PathVariable @Positive(message = "Id must be positive.")  Long id){
+//        List<Projekcija> projekcije = projekcijaService.findByFilmId(id);
+//
+//        return new ResponseEntity<>(toProjekcijaDto.convert(projekcije), HttpStatus.OK);
+//    }
+    
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
+	@DeleteMapping("/{id}")
+	public ResponseEntity<Void> delete(@PathVariable Long id){
+		Projekcija obrisanaProjekcija = projekcijaService.delete(id);
+		
+		if(obrisanaProjekcija != null) {
+			return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+		} else {
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		}
+		
+	}
 
 }
