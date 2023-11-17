@@ -39,7 +39,7 @@ public class Projekcija {
 	@Column
 	private Double cenaKarte;
 	
-	@OneToMany(mappedBy = "projekcija", cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "projekcija", orphanRemoval = true, cascade = CascadeType.ALL)
 	private List<Karta> karte = new ArrayList<Karta>();
 	
 	public Projekcija() {
@@ -114,6 +114,13 @@ public class Projekcija {
 	
 	public void setKarte(List<Karta> karte) {
 		this.karte = karte;
+	}
+	
+	public void obrisiSveKarte() {
+		for(Karta k: this.karte) {
+			k.setProjekcija(null);
+			this.karte.clear();
+		}
 	}
 
 	@Override

@@ -8,7 +8,6 @@ import java.time.format.DateTimeParseException;
 import java.util.List;
 
 import javax.validation.Valid;
-import javax.validation.constraints.Positive;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -106,14 +105,6 @@ public class ProjekcijaController {
         LocalTime vreme = LocalTime.parse(datumIVreme.substring(11), DateTimeFormatter.ofPattern("HH:mm"));
         return LocalDateTime.of(datum, vreme);
     }
-	
-//	//@PreAuthorize("hasAnyRole('KORISNIK', 'ADMIN')")
-//    @GetMapping("/{id}/projekcije")
-//    public ResponseEntity<List<ProjekcijaDTO>> findByFilmId(@PathVariable @Positive(message = "Id must be positive.")  Long id){
-//        List<Projekcija> projekcije = projekcijaService.findByFilmId(id);
-//
-//        return new ResponseEntity<>(toProjekcijaDto.convert(projekcije), HttpStatus.OK);
-//    }
     
     @PreAuthorize("hasRole('ROLE_ADMIN')")
 	@DeleteMapping("/{id}")

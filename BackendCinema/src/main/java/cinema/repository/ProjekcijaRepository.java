@@ -1,7 +1,6 @@
 package cinema.repository;
 
 import java.time.LocalDateTime;
-import java.util.List;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -29,6 +28,5 @@ public interface ProjekcijaRepository extends JpaRepository<Projekcija, Long>{
 	
 	Page<Projekcija> findByCenaKarteBetween(Double cenaKarteOd, Double cenaKarteDo, Pageable pageable);
 	
-	List<Projekcija> findByFilmId(Long filmId);
 
 }

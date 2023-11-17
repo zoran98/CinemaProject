@@ -65,6 +65,9 @@ public class Karta {
 
 	public void setProjekcija(Projekcija projekcija) {
 		this.projekcija = projekcija;
+		if(projekcija != null && !projekcija.getKarte().contains(this)) {
+			projekcija.getKarte().add(this);
+		}
 	}
 
 	public Sediste getSediste() {

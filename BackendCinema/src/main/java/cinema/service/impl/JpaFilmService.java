@@ -1,6 +1,7 @@
 package cinema.service.impl;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -65,6 +66,16 @@ public class JpaFilmService implements FilmService{
 		}
 		return null;
 	}
+	
+//	@Override
+//	public Film delete(Long id) {
+//		Optional<Film> film = filmRepository.findById(id);
+//		if(film.isPresent()) {
+//			filmRepository.deleteById(id);
+//			return film.get();
+//		}
+//		return null;
+//	}
 
 	@Override
 	public Film update(Film film) {

@@ -1,7 +1,6 @@
 package cinema.service.impl;
 
 import java.time.LocalDateTime;
-import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -60,17 +59,12 @@ public class JpaProjekcijaService implements ProjekcijaService{
 	public Projekcija save(Projekcija projekcija) {
 		return projekcijaRepository.save(projekcija);
 	}
-
-	@Override
-	public List<Projekcija> findByFilmId(Long filmId) {
-		// TODO Auto-generated method stub
-		return projekcijaRepository.findByFilmId(filmId);
-	}
-
+	
 	@Override
 	public Projekcija delete(Long id) {
 		Projekcija projekcija = findOne(id);
 		if(projekcija != null) {
+			projekcija.obrisiSveKarte();
 			projekcijaRepository.delete(projekcija);
 			return projekcija;
 		}

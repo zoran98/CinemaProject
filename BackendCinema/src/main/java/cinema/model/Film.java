@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -48,7 +49,7 @@ public class Film {
 	@Column
 	private String opis;
 	
-	@OneToMany(mappedBy = "film", orphanRemoval = true, fetch = FetchType.LAZY)
+	@OneToMany(mappedBy = "film", orphanRemoval = true, fetch = FetchType.EAGER)
 	private List<Projekcija> projekcije = new ArrayList<Projekcija>();
 	
 	public Film() {

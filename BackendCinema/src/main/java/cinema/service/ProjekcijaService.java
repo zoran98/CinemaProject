@@ -1,7 +1,6 @@
 package cinema.service;
 
 import java.time.LocalDateTime;
-import java.util.List;
 
 import org.springframework.data.domain.Page;
 
@@ -20,8 +19,6 @@ public interface ProjekcijaService {
 	Page<Projekcija> findByCenaKarte(Double cenaKarteOd, Double cenaKarteDo, int pageNo);
 	
 	Projekcija save(Projekcija projekcija);
-	
-	List<Projekcija> findByFilmId(Long filmId);
 	
 	Projekcija delete(Long id);
 
