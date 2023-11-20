@@ -57,7 +57,7 @@ public class ProjekcijaController {
 			@RequestParam(value = "cenaKarteDo", required = false) Double cenaKarteDo,
 			@RequestParam(value = "pageNo", defaultValue = "0") int pageNo){
 		
-			Page<Projekcija> page = null;
+			Page<Projekcija> page;
 			if(filmId != null || tipProjekcijeId != null || salaId != null) {
 				page = projekcijaService.search(filmId, tipProjekcijeId, salaId, pageNo);
 			} else if(datumIVremePrikazivanjaOd != null || datumIVremePrikazivanjaDo != null) {
@@ -99,13 +99,7 @@ public class ProjekcijaController {
 		return new ResponseEntity<>(toProjekcijaDto.convert(sacuvanaProjekcija), HttpStatus.CREATED);
 	}
 	
-	private LocalDateTime getLocalDateTime(String datumIVreme) throws DateTimeParseException {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-        LocalDate datum = LocalDate.parse(datumIVreme.substring(0, 10), formatter);
-        LocalTime vreme = LocalTime.parse(datumIVreme.substring(11), DateTimeFormatter.ofPattern("HH:mm"));
-        return LocalDateTime.of(datum, vreme);
-    }
-    
+	
     @PreAuthorize("hasRole('ROLE_ADMIN')")
 	@DeleteMapping("/{id}")
 	public ResponseEntity<Void> delete(@PathVariable Long id){
@@ -118,5 +112,13 @@ public class ProjekcijaController {
 		}
 		
 	}
+    
+    private LocalDateTime getLocalDateTime(String datumIVreme) throws DateTimeParseException {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        LocalDate datum = LocalDate.parse(datumIVreme.substring(0, 10), formatter);
+        LocalTime vreme = LocalTime.parse(datumIVreme.substring(11), DateTimeFormatter.ofPattern("HH:mm"));
+        return LocalDateTime.of(datum, vreme);
+    }
+    
 
 }

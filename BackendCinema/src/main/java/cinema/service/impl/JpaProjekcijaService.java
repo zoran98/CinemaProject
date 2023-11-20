@@ -64,10 +64,29 @@ public class JpaProjekcijaService implements ProjekcijaService{
 	public Projekcija delete(Long id) {
 		Projekcija projekcija = findOne(id);
 		if(projekcija != null) {
-			projekcija.obrisiSveKarte();
+			projekcija.getFilm().getProjekcije().remove(projekcija);
+			projekcija.setFilm(null);
+			projekcija = projekcijaRepository.save(projekcija);
+
 			projekcijaRepository.delete(projekcija);
 			return projekcija;
 		}
+		return null;
+	}
+
+	@Override
+	public Page<Projekcija> find(Long filmId, Long tipProjekcijeId, Long salaId,
+			LocalDateTime datumIVremePrikazivanjaOd, LocalDateTime datumIVremePrikazivanjaDo, Double cenaKarteOd,
+			Double cenaKarteDo, int pageNo) {
+		
+		if (cenaKarteOd == null) {
+            cenaKarteOd = 0.0;
+        }
+
+        if (cenaKarteDo == null) {
+            cenaKarteDo = Double.MAX_VALUE;
+        }
+        
 		return null;
 	}
 

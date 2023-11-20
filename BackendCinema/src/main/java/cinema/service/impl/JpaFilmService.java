@@ -56,26 +56,25 @@ public class JpaFilmService implements FilmService{
 		return filmRepository.save(film);
 	}
 	
-	@Override
-	public Film delete(Long id) {
-		Film film = findOne(id);
-		if(film != null) {
-			film.obrisiSveProjekcije();
-			filmRepository.delete(film);
-			return film;
-		}
-		return null;
-	}
-	
 //	@Override
 //	public Film delete(Long id) {
-//		Optional<Film> film = filmRepository.findById(id);
-//		if(film.isPresent()) {
-//			filmRepository.deleteById(id);
-//			return film.get();
+//		Film film = findOne(id);
+//		if(film != null) {
+//			
+//			filmRepository.delete(film);
+//			return film;
 //		}
 //		return null;
 //	}
+	@Override
+    public Film delete(Long id) {
+        Optional<Film> film = filmRepository.findById(id);
+        if(film.isPresent()){
+            filmRepository.deleteById(id);
+            return film.get();
+        }
+        return null;
+    }
 
 	@Override
 	public Film update(Film film) {

@@ -49,7 +49,7 @@ public class Film {
 	@Column
 	private String opis;
 	
-	@OneToMany(mappedBy = "film", orphanRemoval = true, fetch = FetchType.EAGER)
+	@OneToMany(mappedBy = "film", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	private List<Projekcija> projekcije = new ArrayList<Projekcija>();
 	
 	public Film() {
@@ -166,7 +166,7 @@ public class Film {
 		}
 	}
 	
-	public void obrisiProjekciju(Projekcija projekcija) {
+	public void obrisiProjekciju(Long id) {
 		for(Projekcija p: this.projekcije) {
 			if(p.getId() == id) {
 				this.projekcije.remove(p);
@@ -174,12 +174,12 @@ public class Film {
 			}
 		}
 	}
-	
-	public void obrisiSveProjekcije() {
-		for(Projekcija p: this.projekcije)
-			p.setFilm(null);
-		this.projekcije.clear();
-	}
+//	
+//	public void obrisiSveProjekcije() {
+//		for(Projekcija p: this.projekcije)
+//			p.setFilm(null);
+//		this.projekcije.clear();
+//	}
 
 	@Override
 	public int hashCode() {

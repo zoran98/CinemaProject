@@ -18,6 +18,9 @@ public interface ProjekcijaService {
 	
 	Page<Projekcija> findByCenaKarte(Double cenaKarteOd, Double cenaKarteDo, int pageNo);
 	
+	Page<Projekcija> find(Long filmId, Long tipProjekcijeId, Long salaId, LocalDateTime datumIVremePrikazivanjaOd, 
+			LocalDateTime datumIVremePrikazivanjaDo, Double cenaKarteOd, Double cenaKarteDo, int pageNo);
+	
 	Projekcija save(Projekcija projekcija);
 	
 	Projekcija delete(Long id);

@@ -81,6 +81,7 @@ const Movies = () => {
     CinemaAxios.delete("/filmovi/" + movId)
       .then((res) => {
         console.log(res);
+        
         var nextPage;
         if (pageNo == totalPages - 1 && movies.length == 1) {
           nextPage = pageNo - 1;
@@ -88,6 +89,7 @@ const Movies = () => {
           nextPage = pageNo;
         }
         getMovies(nextPage);
+ //       setMovies((movies)=>movies.filter(movie => movie.id != movId))
       })
       .catch((error) => {
         console.log(error);

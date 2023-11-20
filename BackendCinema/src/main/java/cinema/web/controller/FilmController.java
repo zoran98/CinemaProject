@@ -65,7 +65,7 @@ public class FilmController {
 				
 
 		//Page<Ljubimac> page = ljubimacService.findAll(pageNo);
-		Page<Film> page = null;
+		Page<Film> page;
 		   if(zanrovi != null) {
 		      page = filmService.findByZanrovi(zanrovi, pageNo);
 		   } else if(distributer != null) {

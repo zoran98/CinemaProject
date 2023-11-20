@@ -85,6 +85,15 @@ public class Sala {
 	public void setProjekcije(List<Projekcija> projekcije) {
 		this.projekcije = projekcije;
 	}
+	
+	public void obrisiProjekciju(Long id) {
+		for(Projekcija p: this.projekcije) {
+			if(p.getId() == id) {
+				this.projekcije.remove(p);
+				return;
+			}
+		}
+	}
 
 	@Override
 	public int hashCode() {
