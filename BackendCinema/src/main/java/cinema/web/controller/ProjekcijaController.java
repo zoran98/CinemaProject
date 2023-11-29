@@ -46,6 +46,19 @@ public class ProjekcijaController {
 	@Autowired
 	private ProjekcijaDtoToProjekcija toProjekcija;
 	
+	
+	//@PreAuthorize("hasRole('ROLE_KORISNIK', 'ROLE_ADMIN')")
+//		@GetMapping
+//		public ResponseEntity<List<ProjekcijaDTO>> getAll(@RequestParam(value = "pageNo", defaultValue = "0") int pageNo){
+//			Page<Projekcija> page = projekcijaService.findAll(pageNo);
+//			
+//			HttpHeaders headers = new HttpHeaders();
+//	        headers.add("Total-Pages", Integer.toString(page.getTotalPages()));
+//
+//	        return new ResponseEntity<>(toProjekcijaDto.convert(page.getContent()),headers, HttpStatus.OK);
+//		}
+		
+	
 	//@PreAuthorize("hasRole('ROLE_KORISNIK', 'ROLE_ADMIN')")
 	@GetMapping
 	public ResponseEntity<List<ProjekcijaDTO>> getAll(@RequestParam(value = "filmId", required = false) Long filmId,

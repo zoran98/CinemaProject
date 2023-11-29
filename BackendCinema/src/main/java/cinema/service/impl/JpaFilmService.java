@@ -18,7 +18,7 @@ public class JpaFilmService implements FilmService{
 	
 	@Autowired
 	private FilmRepository filmRepository;
-
+	
 	@Override
 	public Film findOne(Long id) {
 		return filmRepository.findOneById(id);
@@ -58,12 +58,14 @@ public class JpaFilmService implements FilmService{
 	
 //	@Override
 //	public Film delete(Long id) {
-//		Film film = findOne(id);
-//		if(film != null) {
-//			
-//			filmRepository.delete(film);
+//		Film film = filmRepository.findById(id).orElse(null);
+//		Projekcija projekcija = projekcijaRepository.findOneById(id);
+//		if(film != null && projekcija != null) {
+//			film.obrisiProjekciju(projekcija);
+//			filmRepository.save(film);
 //			return film;
 //		}
+//			
 //		return null;
 //	}
 	@Override
