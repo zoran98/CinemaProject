@@ -10,4 +10,6 @@ public interface TipProjekcijeService {
 	
 	List<TipProjekcije> findAll();
 
+	TipProjekcije delete(Long id);
+
 }

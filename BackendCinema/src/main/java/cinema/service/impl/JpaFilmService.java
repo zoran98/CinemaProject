@@ -3,6 +3,7 @@ package cinema.service.impl;
 import java.util.List;
 import java.util.Optional;
 
+import cinema.model.Projekcija;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -12,6 +13,8 @@ import org.springframework.stereotype.Service;
 import cinema.model.Film;
 import cinema.repository.FilmRepository;
 import cinema.service.FilmService;
+
+import javax.transaction.Transactional;
 
 @Service
 public class JpaFilmService implements FilmService{
@@ -55,28 +58,30 @@ public class JpaFilmService implements FilmService{
 	public Film save(Film film) {
 		return filmRepository.save(film);
 	}
-	
-//	@Override
-//	public Film delete(Long id) {
-//		Film film = filmRepository.findById(id).orElse(null);
-//		Projekcija projekcija = projekcijaRepository.findOneById(id);
-//		if(film != null && projekcija != null) {
-//			film.obrisiProjekciju(projekcija);
-//			filmRepository.save(film);
-//			return film;
-//		}
-//			
-//		return null;
-//	}
+
+
+	@Transactional
 	@Override
     public Film delete(Long id) {
-        Optional<Film> film = filmRepository.findById(id);
-        if(film.isPresent()){
-            filmRepository.deleteById(id);
-            return film.get();
+        Film film = filmRepository.findOneById(id);
+        if(film != null){
+            filmRepository.delete(film);
+            return film;
         }
         return null;
     }
+
+
+//	@Override
+//	@Transactional
+//	public Film delete(Long id) {
+//		Optional<Film> film = filmRepository.findById(id);
+//		if(film.isPresent()){
+//			filmRepository.deleteById(id);
+//			return film.get();
+//		}
+//		return null;
+//	}
 
 	@Override
 	public Film update(Film film) {

@@ -41,7 +41,7 @@ public class Projekcija {
 	@Column
 	private Double cenaKarte;
 	
-	@OneToMany(mappedBy = "projekcija", orphanRemoval = true, cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "projekcija", cascade = CascadeType.ALL)
 	private List<Karta> karte = new ArrayList<Karta>();
 	
 	public Projekcija() {
@@ -84,6 +84,9 @@ public class Projekcija {
 
 	public void setTipProjekcije(TipProjekcije tipProjekcije) {
 		this.tipProjekcije = tipProjekcije;
+		if(tipProjekcije != null && !film.getProjekcije().contains(this)){
+			tipProjekcije.getProjekcije().add(this);
+		}
 	}
 
 	public Sala getSala() {
@@ -92,6 +95,9 @@ public class Projekcija {
 
 	public void setSala(Sala sala) {
 		this.sala = sala;
+		if(sala != null && !sala.getProjekcije().contains(this)){
+			sala.getProjekcije().add(this);
+		}
 	}
 
 	public LocalDateTime getDatumIVremePrikazivanja() {

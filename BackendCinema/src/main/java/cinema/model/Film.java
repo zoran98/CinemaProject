@@ -49,7 +49,7 @@ public class Film {
 	@Column
 	private String opis;
 	
-	@OneToMany(mappedBy = "film", cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "film", cascade = CascadeType.ALL, orphanRemoval = true)
 	private List<Projekcija> projekcije = new ArrayList<Projekcija>();
 	
 	public Film() {
@@ -166,16 +166,17 @@ public class Film {
 		}
 	}
 	
-	public void obrisiProjekciju(Projekcija projekcija) {
-		projekcije.remove(projekcija);
-		projekcija.setFilm(null);
-		}
-	
-//	public void obrisiSveProjekcije() {
-//		for(Projekcija p: this.projekcije)
-//			p.setFilm(null);
-//		this.projekcije.clear();
+//	public void obrisiProjekciju() {
+//		if(projekcije.contains(this)){
+//
+//		}
 //	}
+	
+	public void obrisiSveProjekcije() {
+		for(Projekcija p: this.projekcije)
+			p.setFilm(null);
+//		this.projekcije.clear();
+	}
 
 	@Override
 	public int hashCode() {

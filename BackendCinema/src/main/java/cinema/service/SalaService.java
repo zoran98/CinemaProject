@@ -10,4 +10,6 @@ public interface SalaService {
 	
 	List<Sala> findAll();
 
+	Sala delete(Long id);
+
 }

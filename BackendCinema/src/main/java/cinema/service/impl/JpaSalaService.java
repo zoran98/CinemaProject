@@ -1,6 +1,7 @@
 package cinema.service.impl;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -23,6 +24,16 @@ public class JpaSalaService implements SalaService{
 	@Override
 	public List<Sala> findAll() {
 		return salaRepository.findAll();
+	}
+
+	@Override
+	public Sala delete(Long id) {
+		Optional<Sala> sala = salaRepository.findById(id);
+		if(sala.isPresent()) {
+			salaRepository.deleteById(id);
+			return sala.get();
+		}
+		return null;
 	}
 
 }

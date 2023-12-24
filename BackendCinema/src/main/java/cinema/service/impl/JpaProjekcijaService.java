@@ -66,6 +66,10 @@ public class JpaProjekcijaService implements ProjekcijaService{
 		if(projekcija != null) {
 			projekcija.getFilm().getProjekcije().remove(projekcija);
 			projekcija.setFilm(null);
+			projekcija.getSala().getProjekcije().remove(projekcija);
+			projekcija.setSala(null);
+			projekcija.getTipProjekcije().getProjekcije().remove(projekcija);
+			projekcija.setTipProjekcije(null);
 			projekcija = projekcijaRepository.save(projekcija);
 			projekcijaRepository.delete(projekcija);
 			return projekcija;
