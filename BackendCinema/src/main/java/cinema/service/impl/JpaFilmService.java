@@ -60,7 +60,6 @@ public class JpaFilmService implements FilmService{
 	}
 
 
-	@Transactional
 	@Override
     public Film delete(Long id) {
         Film film = filmRepository.findOneById(id);
@@ -71,17 +70,6 @@ public class JpaFilmService implements FilmService{
         return null;
     }
 
-
-//	@Override
-//	@Transactional
-//	public Film delete(Long id) {
-//		Optional<Film> film = filmRepository.findById(id);
-//		if(film.isPresent()){
-//			filmRepository.deleteById(id);
-//			return film.get();
-//		}
-//		return null;
-//	}
 
 	@Override
 	public Film update(Film film) {

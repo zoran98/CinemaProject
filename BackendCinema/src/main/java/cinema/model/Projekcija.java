@@ -26,13 +26,15 @@ public class Projekcija {
 	private Long id;
 	
 	@ManyToOne
-	@JoinColumn(name="film_id")
+	@JoinColumn(name = "film_id", nullable = false)
 	private Film film;
 	
-	@ManyToOne
+	@ManyToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "tip_projekcije_id", nullable = false)
 	private TipProjekcije tipProjekcije;
 	
-	@ManyToOne
+	@ManyToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "sala_id", nullable = false)
 	private Sala sala;
 	
 	@Column(name="datum_i_vreme_prikazivanja", nullable = false)

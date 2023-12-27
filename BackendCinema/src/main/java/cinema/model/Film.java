@@ -158,25 +158,6 @@ public class Film {
 	public void setProjekcije(List<Projekcija> projekcije) {
 		this.projekcije = projekcije;
 	}
-	
-	public void dodajProjekciju(Projekcija projekcija) {
-		this.projekcije.add(projekcija);
-		if(!equals(projekcija.getFilm())) {
-			projekcija.setFilm(this);
-		}
-	}
-	
-//	public void obrisiProjekciju() {
-//		if(projekcije.contains(this)){
-//
-//		}
-//	}
-	
-	public void obrisiSveProjekcije() {
-		for(Projekcija p: this.projekcije)
-			p.setFilm(null);
-//		this.projekcije.clear();
-	}
 
 	@Override
 	public int hashCode() {
