@@ -2,16 +2,7 @@ package cinema.model;
 
 import java.util.Objects;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
 @Table(name="sedista")
@@ -28,7 +19,7 @@ public class Sediste {
 	@JoinColumn(nullable = false)
 	private Sala sala;
 	
-	@OneToOne
+	@OneToOne(mappedBy = "sediste", cascade = CascadeType.ALL, orphanRemoval = true)
 	private Karta karta;
 	
 	public Sediste() {

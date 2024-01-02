@@ -24,11 +24,12 @@ public class Karta {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
-	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(nullable = false)
+	@ManyToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "projekcija_id", nullable = false)
 	private Projekcija projekcija;
 	
 	@OneToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "sediste_id", nullable = false)
 	private Sediste sediste;
 	
 	@Column(name="datum_i_vreme_prodaje", nullable = false)

@@ -65,15 +65,17 @@ INSERT INTO projekcije (id, film_id, tip_projekcije_id, sala_id, datum_i_vreme_p
 INSERT INTO projekcije (id, film_id, tip_projekcije_id, sala_id, datum_i_vreme_prikazivanja, cena_karte) 
     VALUES (10, 3, 10, 10, '2021-01-29 17:00', 700);
 
-    
+INSERT INTO sedista (id, redni_broj, sala_id) VALUES (1, 5, 1);
+INSERT INTO sedista (id, redni_broj, sala_id) VALUES (2, 6, 2);
+INSERT INTO sedista (id, redni_broj, sala_id) VALUES (3, 7, 3);
 
---INSERT INTO sedista (id, redni_broj, sala_id, karta_id) VALUES (1, 5, 1, 1);
---INSERT INTO sedista (id, redni_broj, sala_id, karta_id) VALUES (2, 6, 2, 2);
---INSERT INTO sedista (id, redni_broj, sala_id, karta_id) VALUES (3, 7, 3, 3);
+INSERT INTO karte (id, projekcija_id, sediste_id, datum_i_vreme_prodaje, user_id) VALUES (1, 1, 1, '2020-08-10 18:00', 1);
+INSERT INTO karte (id, projekcija_id, sediste_id, datum_i_vreme_prodaje, user_id) VALUES (2, 2, 2, '2020-08-12 19:00', 2);
+INSERT INTO karte (id, projekcija_id, sediste_id, datum_i_vreme_prodaje, user_id) VALUES (3, 3, 3, '2020-08-14 20:00', 3);
+
+
+
     
---INSERT INTO karte (id, projekcija_id, datum_i_vreme_prodaje, user_id) VALUES (1, 1, '2020-08-10 18:00', 1);
---INSERT INTO karte (id, projekcija_id, datum_i_vreme_prodaje, user_id) VALUES (2, 2, '2020-08-12 19:00', 2);
---INSERT INTO karte (id, projekcija_id, datum_i_vreme_prodaje, user_id) VALUES (3, 3, '2020-08-14 20:00', 3);
 
 	
 	

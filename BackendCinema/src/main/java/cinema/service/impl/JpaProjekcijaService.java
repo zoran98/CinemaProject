@@ -70,8 +70,11 @@ public class JpaProjekcijaService implements ProjekcijaService{
 			projekcija.setSala(null);
 			projekcija.getTipProjekcije().getProjekcije().remove(projekcija);
 			projekcija.setTipProjekcije(null);
+//			projekcija.setKarte(null);
+			System.out.println("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
 			projekcija = projekcijaRepository.save(projekcija);
 			projekcijaRepository.delete(projekcija);
+			System.out.println("bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb");
 			return projekcija;
 		}
 		return null;
