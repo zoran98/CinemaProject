@@ -57,7 +57,8 @@ const Movie = () => {
 
   const buyTicket = (movId) => {
     setShowButton(false);
-    alert("Kupili ste kartu!");
+    navigate("/buyTicket/" + movId);
+    // alert("Kupili ste kartu!");
   };
 
   return (

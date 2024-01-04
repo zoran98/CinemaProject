@@ -18,6 +18,7 @@ import EditMovie from "./components/Movies/EditMovie";
 import Projections from "./components/Projections/Projections";
 import Projection from "./components/Projections/Projection";
 import AddProjection from "./components/Projections/AddProjection";
+import BuyTicket from "./components/BuyTicket/BuyTicket";
 
 const App = () => {
     return (
@@ -55,6 +56,7 @@ const App = () => {
               <Route path="/projections" element={<Projections/>}/>
               <Route path="/projection/:id" element={<Projection/>}/>
               <Route path="/projections/add" element={<AddProjection/>}/>
+              <Route path="/buyTicket/:id" element={<BuyTicket/>}/>
               <Route path="*" element={<NotFound/>} />
             </Routes>
           </Container>
