@@ -1,6 +1,7 @@
 package cinema.model;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -14,8 +15,8 @@ public class KupljenaKarta {
     private Long id;
     @Column
     private String nazivFilma;
-    @OneToMany
-    private List<Projekcija> prjekcije = new ArrayList<>();
+    @Column
+    private LocalDateTime projekcijaDatum;
 
     @Column
     private String tipProjekcije;
@@ -24,7 +25,7 @@ public class KupljenaKarta {
     private String sala;
 
     @Column
-    private Double cena;
+    private Double cenaKarte;
 
     @OneToMany
     private List<Sediste> sedista = new ArrayList<>();
@@ -35,14 +36,14 @@ public class KupljenaKarta {
     public KupljenaKarta() {
     }
 
-    public KupljenaKarta(Long id, String nazivFilma, List<Projekcija> prjekcije, String tipProjekcije,
-                         String sala, Double cena, List<Sediste> sedista, Double ukupnaCena) {
+    public KupljenaKarta(Long id, String nazivFilma, LocalDateTime projekcijaDatum, String tipProjekcije,
+                         String sala, Double cenaKarte, List<Sediste> sedista, Double ukupnaCena) {
         this.id = id;
         this.nazivFilma = nazivFilma;
-        this.prjekcije = prjekcije;
+        this.projekcijaDatum = projekcijaDatum;
         this.tipProjekcije = tipProjekcije;
         this.sala = sala;
-        this.cena = cena;
+        this.cenaKarte = cenaKarte;
         this.sedista = sedista;
         this.ukupnaCena = ukupnaCena;
     }
@@ -63,12 +64,12 @@ public class KupljenaKarta {
         this.nazivFilma = nazivFilma;
     }
 
-    public List<Projekcija> getPrjekcije() {
-        return prjekcije;
+    public LocalDateTime getProjekcijaDatum() {
+        return projekcijaDatum;
     }
 
-    public void setPrjekcije(List<Projekcija> prjekcije) {
-        this.prjekcije = prjekcije;
+    public void setProjekcijaDatum(LocalDateTime projekcijaDatum) {
+        this.projekcijaDatum = projekcijaDatum;
     }
 
     public String getTipProjekcije() {
@@ -87,12 +88,12 @@ public class KupljenaKarta {
         this.sala = sala;
     }
 
-    public Double getCena() {
-        return cena;
+    public Double getCenaKarte() {
+        return cenaKarte;
     }
 
-    public void setCena(Double cena) {
-        this.cena = cena;
+    public void setCenaKarte(Double cenaKarte) {
+        this.cenaKarte = cenaKarte;
     }
 
     public List<Sediste> getSedista() {
@@ -109,7 +110,7 @@ public class KupljenaKarta {
 
     public void setUkupnaCena(Double ukupnaCena) {
         this.ukupnaCena = ukupnaCena;
-        this.ukupnaCena += cena;
+        this.ukupnaCena *= getSedista().size();
     }
 
     @Override
@@ -130,10 +131,10 @@ public class KupljenaKarta {
         return "KupljenaKarta{" +
                 "id=" + id +
                 ", nazivFilma='" + nazivFilma + '\'' +
-                ", prjekcije=" + prjekcije +
+                ", prjekcija=" + projekcijaDatum +
                 ", tipProjekcije='" + tipProjekcije + '\'' +
                 ", sala='" + sala + '\'' +
-                ", cena=" + cena +
+                ", cena=" + cenaKarte +
                 ", sedista=" + sedista +
                 ", ukupnaCena=" + ukupnaCena +
                 '}';

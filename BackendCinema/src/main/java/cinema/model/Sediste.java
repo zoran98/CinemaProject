@@ -19,19 +19,24 @@ public class Sediste {
 	@JoinColumn(nullable = false)
 	private Sala sala;
 	
-	@OneToOne(mappedBy = "sediste", cascade = CascadeType.ALL, orphanRemoval = true)
+	@OneToOne
 	private Karta karta;
+
+	@ManyToOne
+	private KupljenaKarta kupljenaKarta;
+
 	
 	public Sediste() {
 		super();
 	}
 
-	public Sediste(Long id, Integer redniBroj, Sala sala, Karta karta) {
+	public Sediste(Long id, Integer redniBroj, Sala sala, Karta karta, KupljenaKarta kupljenaKarta) {
 		super();
 		this.id = id;
 		this.redniBroj = redniBroj;
 		this.sala = sala;
 		this.karta = karta;
+		this.kupljenaKarta = kupljenaKarta;
 	}
 
 	public Long getId() {
@@ -64,6 +69,14 @@ public class Sediste {
 	
 	public void setKarta(Karta karta) {
 		this.karta = karta;
+	}
+
+	public KupljenaKarta getKupljenaKarta() {
+		return kupljenaKarta;
+	}
+
+	public void setKupljenaKarta(KupljenaKarta kupljenaKarta) {
+		this.kupljenaKarta = kupljenaKarta;
 	}
 
 	@Override
