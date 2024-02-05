@@ -7,14 +7,12 @@ const BuyTicket = () => {
 
     const emptyTicket = {
         naziv: "",
-        reziser: "",
-        glumci: "",
-        zanrovi: "",
-        trajanje: "",
-        distributer: "",
-        zemljaPorekla: "",
-        godinaProizvodnje: "",
-        opis: ""
+        projekcijaDatum: "",
+        tipProjekcije: "",
+        sala: "",
+        cenaKarte: "",
+        sedista: "",
+        ukupnaCena: ""
     }
 
   const navigate = useNavigate();
@@ -47,7 +45,7 @@ const BuyTicket = () => {
   const canCreatePet = () => {};
 
   const doAdd = () => {
-
+    goToMovies();
   };
 
   return (
@@ -66,87 +64,61 @@ const BuyTicket = () => {
         </Form.Group>
 
         <Form.Group>
-          <Form.Label>Reziser</Form.Label>
+          <Form.Label>Datum Projekcije</Form.Label>
           <Form.Control
             onChange={(e) => addValueInputChange(e)}
-            name="reziser"
-            value={buyTicket.reziser}
+            name="projekcijaDatum"
+            value={buyTicket.projekcijaDatum}
             as="input"
           ></Form.Control>
         </Form.Group>
 
         <Form.Group>
-          <Form.Label>Glumci</Form.Label>
+          <Form.Label>Tip Projekcije</Form.Label>
           <Form.Control
             onChange={(e) => addValueInputChange(e)}
-            name="glumci"
-            value={buyTicket.glumci}
+            name="tipProjekcije"
+            value={buyTicket.tipProjekcije}
             as="input"
           ></Form.Control>
         </Form.Group>
 
         <Form.Group>
-          <Form.Label>Zanrovi</Form.Label>
+          <Form.Label>Sala</Form.Label>
           <Form.Control
             onChange={(e) => addValueInputChange(e)}
-            name="zanrovi"
-            value={buyTicket.zanrovi}
+            name="sala"
+            value={buyTicket.sala}
             as="input"
           ></Form.Control>
         </Form.Group>
 
         <Form.Group>
-          <Form.Label>Trajanje</Form.Label>
+          <Form.Label>Cena Karte</Form.Label>
           <Form.Control
             onChange={(e) => addValueInputChange(e)}
-            name="trajanje"
-            value={buyTicket.trajanje}
-            as="input"
-            type="number"
-            min="0"
-            step="1"
-          ></Form.Control>
-        </Form.Group>
-
-        <Form.Group>
-          <Form.Label>Distributer</Form.Label>
-          <Form.Control
-            onChange={(e) => addValueInputChange(e)}
-            name="distributer"
-            value={buyTicket.distributer}
+            name="cenaKarte"
+            value={buyTicket.cenaKarte}
             as="input"
           ></Form.Control>
         </Form.Group>
 
         <Form.Group>
-          <Form.Label>Zemlja porekla</Form.Label>
+          <Form.Label>Sedista</Form.Label>
           <Form.Control
             onChange={(e) => addValueInputChange(e)}
-            name="zemljaPorekla"
-            value={buyTicket.zemljaPorekla}
+            name="sedista"
+            value={buyTicket.sedista}
             as="input"
           ></Form.Control>
         </Form.Group>
 
         <Form.Group>
-          <Form.Label>Godina proizvodnje</Form.Label>
+          <Form.Label>Ukupna Cena</Form.Label>
           <Form.Control
             onChange={(e) => addValueInputChange(e)}
-            name="godinaProizvodnje"
-            value={buyTicket.godinaProizvodnje}
-            as="input"
-            type="number"
-            min="0"
-            step="1"
-          ></Form.Control>
-        </Form.Group>
-
-        <Form.Group>
-          <Form.Label>Opis</Form.Label>
-          <Form.Control
-            onChange={(e) => addValueInputChange(e)}
-            name="opis"
-            value={buyTicket.opis}
+            name="ukupnaCena"
+            value={buyTicket.ukupnaCena}
             as="input"
           ></Form.Control>
         </Form.Group>
