@@ -8,4 +8,5 @@ public interface KupljenaKartaService {
 
     KupljenaKarta findOne(Long id);
     List<KupljenaKarta> findAll();
+    KupljenaKarta save(KupljenaKarta kupljenaKarta);
 }

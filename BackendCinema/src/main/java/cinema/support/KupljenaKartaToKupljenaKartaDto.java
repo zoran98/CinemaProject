@@ -26,7 +26,7 @@ public class KupljenaKartaToKupljenaKartaDto implements Converter<KupljenaKarta,
     }
 
     public List<KupljenaKartaDTO> convert(List<KupljenaKarta> kupljeneKarte){
-        List<KupljenaKartaDTO> dto = new ArrayList<KupljenaKartaDTO>();
+        List<KupljenaKartaDTO> dto = new ArrayList<>();
         for(KupljenaKarta kk: kupljeneKarte){
             dto.add(convert(kk));
         }

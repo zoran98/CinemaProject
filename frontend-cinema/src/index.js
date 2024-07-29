@@ -19,6 +19,7 @@ import Projections from "./components/Projections/Projections";
 import Projection from "./components/Projections/Projection";
 import AddProjection from "./components/Projections/AddProjection";
 import BuyTicket from "./components/BuyTicket/BuyTicket";
+import ListOfTickets from "./components/BuyTicket/ListOfTickets";
 
 const App = () => {
     return (
@@ -36,6 +37,9 @@ const App = () => {
               </Nav.Link>
               <Nav.Link as={Link} to="/projections">
                 Projekcije
+              </Nav.Link>
+              <Nav.Link as={Link} to="/listoftickets">
+                Kupljene karte
               </Nav.Link>
             </Nav>
 
@@ -57,6 +61,7 @@ const App = () => {
               <Route path="/projection/:id" element={<Projection/>}/>
               <Route path="/projections/add" element={<AddProjection/>}/>
               <Route path="/buyTicket/:id" element={<BuyTicket/>}/>
+              <Route path="/listoftickets" element={<ListOfTickets/>}/>
               <Route path="*" element={<NotFound/>} />
             </Routes>
           </Container>

@@ -1,7 +1,6 @@
 package cinema.service.impl;
 
 import cinema.model.Karta;
-import cinema.model.TipProjekcije;
 import cinema.repository.KartaRepository;
 import cinema.service.KartaService;
 import org.springframework.beans.factory.annotation.Autowired;

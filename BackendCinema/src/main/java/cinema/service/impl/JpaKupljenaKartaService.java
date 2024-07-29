@@ -23,4 +23,9 @@ public class JpaKupljenaKartaService implements KupljenaKartaService {
     public List<KupljenaKarta> findAll() {
         return kupljenaKartaRepository.findAll();
     }
+
+	@Override
+	public KupljenaKarta save(KupljenaKarta kupljenaKarta) {
+		return kupljenaKartaRepository.save(kupljenaKarta);
+	}
 }
